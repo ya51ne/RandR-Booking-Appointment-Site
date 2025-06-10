@@ -133,21 +133,10 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #e8f4f1 url('attached_assets/hero-background.png') center/cover no-repeat;
+    background: linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
     position: relative;
     overflow: hidden;
     padding: 160px 0 80px;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(245, 249, 245, 0.1) 100%);
-    z-index: 1;
 }
 
 .hero-content {
@@ -157,6 +146,7 @@ h4 {
     padding: 2rem;
     width: 100%;
     max-width: 800px;
+    margin: 0 auto;
 }
 
 
