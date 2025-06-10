@@ -75,23 +75,9 @@ h4 {
     align-items: center;
 }
 
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
 .nav-logo .logo {
-    height: 70px;
+    height: 50px;
     width: auto;
-}
-
-.nav-brand-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2c5f5f;
-    margin: 0;
 }
 
 .nav-menu {
@@ -153,7 +139,12 @@ h4 {
     padding-top: 80px;
 }
 
-
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    padding: 2rem;
+    z-index: 2;
+}
 
 .hero h1 {
     margin-bottom: 1rem;
@@ -171,22 +162,12 @@ h4 {
     color: #666;
     margin-bottom: 2rem;
     font-weight: 300;
-    margin-top: 2rem;
 }
 
 .hero-buttons {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    justify-content: center;
-}
-
-.hero-content {
-    flex: 1;
-    max-width: 600px;
-    padding: 2rem;
-    z-index: 2;
-    text-align: center;
 }
 
 .btn-primary, .btn-secondary {
