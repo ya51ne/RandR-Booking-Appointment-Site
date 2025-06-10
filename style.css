@@ -909,7 +909,7 @@ h4 {
 }
 
 .accordion-item.active .accordion-content {
-    padding: 2rem 2rem 4rem;
+    padding: 2rem 2rem 5rem;
     max-height: 500px;
 }
 
