@@ -372,12 +372,14 @@ h4 {
 }
 
 .about-image {
-    height: 400px;
+    height: 100%;
+    min-height: 600px;
     position: relative;
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     background: #f0f0f0;
+    align-self: stretch;
 }
 
 .wellness-image {
