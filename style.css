@@ -374,15 +374,20 @@ h4 {
 .about-image {
     height: 400px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wellness-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    padding: 10px;
 }
 
 .wellness-image:hover {
