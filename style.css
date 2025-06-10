@@ -560,7 +560,9 @@ h4 {
 }
 
 .instagram-icon {
-    font-size: 1.2rem;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
 }
 
 .contact-map {
