@@ -800,7 +800,7 @@ h4 {
 
 /* Page Hero Section */
 .page-hero {
-    padding: 160px 0 80px;
+    padding: 140px 0 140px;
     background: linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
     text-align: center;
     position: relative;
