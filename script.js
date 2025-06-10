@@ -67,11 +67,30 @@ if (bookingForm) {
         
         // Collect form data
         const formData = new FormData(this);
+        const selectedServices = formData.getAll('services');
+        
+        // Validate service selection
+        if (selectedServices.length === 0) {
+            const errorMessage = createMessage('error', 'Please select at least one service.');
+            this.insertBefore(errorMessage, this.firstChild);
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
+            return;
+        }
+        
+        if (selectedServices.length > 10) {
+            const errorMessage = createMessage('error', 'Please select no more than 10 services.');
+            this.insertBefore(errorMessage, this.firstChild);
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
+            return;
+        }
+        
         const bookingData = {
             name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
-            service: formData.get('service'),
+            services: selectedServices,
             date: formData.get('date'),
             message: formData.get('message') || 'No additional notes'
         };
@@ -114,7 +133,8 @@ async function simulateBookingSubmission(data) {
     console.log('Booking submitted:', data);
     
     // Create email link for fallback
-    const emailSubject = encodeURIComponent(`Booking Request - ${data.service}`);
+    const servicesText = Array.isArray(data.services) ? data.services.join(', ') : data.services;
+    const emailSubject = encodeURIComponent(`Booking Request - ${servicesText}`);
     const emailBody = encodeURIComponent(`
 Hello Zeena,
 
@@ -123,7 +143,7 @@ I would like to book an appointment for the following:
 Name: ${data.name}
 Email: ${data.email}
 Phone: ${data.phone}
-Service: ${data.service}
+Services: ${servicesText}
 Preferred Date: ${data.date}
 Additional Notes: ${data.message}
 
@@ -149,13 +169,58 @@ function createMessage(type, text) {
     return messageDiv;
 }
 
-// Service price update based on selection
-const serviceSelect = document.getElementById('service');
-if (serviceSelect) {
-    serviceSelect.addEventListener('change', function() {
-        // You could add price display logic here if needed
-        console.log('Selected service:', this.value);
+// Multiple services selection handling
+const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
+const selectedCountElement = document.getElementById('selectedCount');
+const estimatedTotalElement = document.getElementById('estimatedTotal');
+
+if (serviceCheckboxes.length > 0) {
+    serviceCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', handleServiceSelection);
     });
+}
+
+function handleServiceSelection() {
+    const checkedBoxes = document.querySelectorAll('input[name="services"]:checked');
+    const count = checkedBoxes.length;
+    
+    // Update selected count
+    if (selectedCountElement) {
+        selectedCountElement.textContent = count;
+    }
+    
+    // Calculate estimated total
+    let total = 0;
+    checkedBoxes.forEach(checkbox => {
+        const price = parseInt(checkbox.dataset.price);
+        total += price;
+    });
+    
+    // Update estimated total display
+    if (estimatedTotalElement) {
+        if (count > 0) {
+            estimatedTotalElement.textContent = `(Estimated total: From £${total})`;
+        } else {
+            estimatedTotalElement.textContent = '';
+        }
+    }
+    
+    // Enforce 1-10 services limit
+    if (count >= 10) {
+        // Disable unchecked boxes when 10 are selected
+        serviceCheckboxes.forEach(checkbox => {
+            if (!checkbox.checked) {
+                checkbox.disabled = true;
+                checkbox.parentElement.style.opacity = '0.5';
+            }
+        });
+    } else {
+        // Re-enable all checkboxes if under the limit
+        serviceCheckboxes.forEach(checkbox => {
+            checkbox.disabled = false;
+            checkbox.parentElement.style.opacity = '1';
+        });
+    }
 }
 
 // Form validation enhancement
