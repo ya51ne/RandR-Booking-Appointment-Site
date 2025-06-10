@@ -410,6 +410,13 @@ h4 {
     background: white;
 }
 
+.booking p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
 .booking-form-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
