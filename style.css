@@ -529,6 +529,18 @@ h4 {
     color: #555;
 }
 
+.email-link {
+    color: #4a9b8e;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: #2c5f5f;
+    text-decoration: underline;
+}
+
 .social-links {
     margin-top: 1rem;
 }
