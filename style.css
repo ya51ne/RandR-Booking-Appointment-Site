@@ -808,6 +808,29 @@ h4 {
     background-color: rgba(74, 155, 142, 0.05);
 }
 
+.service-checkbox input[type="checkbox"]:checked + .checkmark + span {
+    font-weight: 600;
+    color: #2c5f5f;
+}
+
+.service-checkbox:has(input[type="checkbox"]:checked) {
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    border-radius: 8px;
+}
+
+/* Fallback for browsers that don't support :has() */
+.service-checkbox.selected {
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    border-radius: 8px;
+}
+
+.service-checkbox.selected span:not(.checkmark) {
+    font-weight: 600;
+    color: #2c5f5f;
+}
+
 .service-checkbox input[type="checkbox"] {
     display: none;
 }

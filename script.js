@@ -231,6 +231,16 @@ function handleServiceSelection() {
     const checkedBoxes = document.querySelectorAll('input[name="services"]:checked');
     const count = checkedBoxes.length;
     
+    // Update visual feedback for selected services
+    serviceCheckboxes.forEach(checkbox => {
+        const parentLabel = checkbox.closest('.service-checkbox');
+        if (checkbox.checked) {
+            parentLabel.classList.add('selected');
+        } else {
+            parentLabel.classList.remove('selected');
+        }
+    });
+    
     // Update selected count
     if (selectedCountElement) {
         selectedCountElement.textContent = count;
