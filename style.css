@@ -147,7 +147,7 @@ h4 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(245, 249, 245, 0.3) 0%, rgba(232, 244, 241, 0.3) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(245, 249, 245, 0.6) 100%);
     z-index: 1;
 }
 
@@ -164,7 +164,7 @@ h4 {
 .hero h1 {
     margin-bottom: 1rem;
     color: #2c5f5f;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 0 2px 8px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .ampersand {
@@ -174,10 +174,11 @@ h4 {
 
 .hero-subtitle {
     font-size: 1.3rem;
-    color: #666;
+    color: #555;
     margin-bottom: 2rem;
     font-weight: 300;
     margin-top: 2rem;
+    text-shadow: 0 1px 4px rgba(255,255,255,0.8);
 }
 
 .hero-buttons {
@@ -804,21 +805,42 @@ h4 {
 /* Page Hero Section */
 .page-hero {
     padding: 160px 0 80px;
-    background: linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
+    background: url('attached_assets/hero-background.png') center/cover no-repeat;
+    background-color: #f5f9f5;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(245, 249, 245, 0.6) 100%);
+    z-index: 1;
+}
+
+.page-hero .container {
+    position: relative;
+    z-index: 2;
 }
 
 .page-hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     color: #2c5f5f;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .page-hero p {
     font-size: 1.2rem;
-    color: #666;
+    color: #555;
     max-width: 600px;
     margin: 0 auto;
+    text-shadow: 0 1px 4px rgba(255,255,255,0.8);
 }
 
 /* FAQ Styles */
