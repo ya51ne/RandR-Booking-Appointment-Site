@@ -853,22 +853,10 @@ h4 {
     border-color: #28a745;
 }
 
-.service-checkbox input[type="checkbox"]:checked + .checkmark::after {
-    content: "";
-    position: absolute;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 9px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
 .service-checkbox span:not(.checkmark) {
     flex: 1;
     word-wrap: break-word;
-    padding-left: 0;
+    padding-left: 1rem;
 }
 
 .services-info {
@@ -903,12 +891,8 @@ h4 {
         margin-top: 1px;
     }
     
-    .service-checkbox input[type="checkbox"]:checked + .checkmark::after {
-        left: 5px;
-        top: 1px;
-        width: 4px;
-        height: 8px;
-        border-width: 0 2px 2px 0;
+    .service-checkbox span:not(.checkmark) {
+        padding-left: 0.75rem;
     }
 }
 
