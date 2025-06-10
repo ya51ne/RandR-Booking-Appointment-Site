@@ -231,7 +231,7 @@ function toggleAccordion(element) {
         content.style.maxHeight = '0';
     } else {
         accordionItem.classList.add('active');
-        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.maxHeight = content.scrollHeight + 20 + 'px'; // Add extra space for padding
     }
 }
 

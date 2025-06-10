@@ -879,7 +879,7 @@ h4 {
 
 .accordion-item.active .accordion-content {
     padding: 1.5rem;
-    max-height: 300px;
+    max-height: 500px;
 }
 
 .accordion-content p {
