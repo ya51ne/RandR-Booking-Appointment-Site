@@ -55,7 +55,7 @@ h4 {
 
 /* Navigation */
 .navbar {
-    background: rgba(245, 249, 245, 0.95);
+    background: linear-gradient(135deg, rgba(245, 249, 245, 0.95) 0%, rgba(232, 244, 241, 0.95) 100%);
     backdrop-filter: blur(10px);
     position: fixed;
     top: 0;
@@ -154,6 +154,10 @@ h4 {
 .hero-content {
     position: relative;
     z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
 }
 
 
@@ -674,6 +678,7 @@ h4 {
 
     .hero-content {
         text-align: center;
+        padding: 1rem;
     }
 
     .hero-buttons {
