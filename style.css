@@ -133,7 +133,8 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('attached_assets/hero-background.png') center/cover no-repeat, linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
+    background: linear-gradient(135deg, rgba(245, 249, 245, 0.3) 0%, rgba(232, 244, 241, 0.3) 100%), url('attached_assets/hero-background.png') center/cover no-repeat;
+    background-blend-mode: overlay;
     position: relative;
     overflow: hidden;
     padding: 160px 0 80px;
@@ -146,7 +147,7 @@ h4 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(245, 249, 245, 0.4) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(245, 249, 245, 0.2) 100%);
     z-index: 1;
 }
 
@@ -804,7 +805,8 @@ h4 {
 /* Page Hero Section */
 .page-hero {
     padding: 160px 0 80px;
-    background: url('attached_assets/hero-background.png') center/cover no-repeat, linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
+    background: linear-gradient(135deg, rgba(245, 249, 245, 0.3) 0%, rgba(232, 244, 241, 0.3) 100%), url('attached_assets/hero-background.png') center/cover no-repeat;
+    background-blend-mode: overlay;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -817,7 +819,7 @@ h4 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(245, 249, 245, 0.4) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(245, 249, 245, 0.2) 100%);
     z-index: 1;
 }
 
