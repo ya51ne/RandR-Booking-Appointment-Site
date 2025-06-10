@@ -41,9 +41,54 @@ window.addEventListener('scroll', () => {
 
 // Set minimum date for booking to today
 const dateInput = document.getElementById('date');
+const timeSlotGroup = document.getElementById('timeSlotGroup');
+const timeSlotSelect = document.getElementById('timeSlot');
+
 if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
+    
+    // Show time slots when date is selected
+    dateInput.addEventListener('change', function() {
+        if (this.value) {
+            timeSlotGroup.style.display = 'block';
+            timeSlotSelect.required = true;
+            
+            // Check if selected date is today and disable past time slots
+            const selectedDate = new Date(this.value);
+            const today = new Date();
+            const isToday = selectedDate.toDateString() === today.toDateString();
+            
+            if (isToday) {
+                const currentHour = today.getHours();
+                const options = timeSlotSelect.querySelectorAll('option');
+                
+                options.forEach(option => {
+                    if (option.value) {
+                        const slotHour = parseInt(option.value.split(':')[0]);
+                        if (slotHour <= currentHour) {
+                            option.disabled = true;
+                            option.style.color = '#ccc';
+                        } else {
+                            option.disabled = false;
+                            option.style.color = '';
+                        }
+                    }
+                });
+            } else {
+                // Enable all time slots for future dates
+                const options = timeSlotSelect.querySelectorAll('option');
+                options.forEach(option => {
+                    option.disabled = false;
+                    option.style.color = '';
+                });
+            }
+        } else {
+            timeSlotGroup.style.display = 'none';
+            timeSlotSelect.required = false;
+            timeSlotSelect.value = '';
+        }
+    });
 }
 
 // Booking form submission
@@ -92,6 +137,7 @@ if (bookingForm) {
             phone: formData.get('phone'),
             services: selectedServices,
             date: formData.get('date'),
+            timeSlot: formData.get('timeSlot'),
             message: formData.get('message') || 'No additional notes'
         };
         
@@ -145,6 +191,7 @@ Email: ${data.email}
 Phone: ${data.phone}
 Services: ${servicesText}
 Preferred Date: ${data.date}
+Preferred Time: ${data.timeSlot}
 Additional Notes: ${data.message}
 
 Please contact me to confirm the appointment.
