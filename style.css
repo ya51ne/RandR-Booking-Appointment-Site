@@ -133,6 +133,7 @@ h4 {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
     position: relative;
     overflow: hidden;
@@ -168,11 +169,11 @@ h4 {
 }
 
 .hero-content {
-    flex: 1;
-    max-width: 600px;
     padding: 2rem;
     z-index: 2;
     text-align: center;
+    width: 100%;
+    max-width: 800px;
 }
 
 .btn-primary, .btn-secondary {
