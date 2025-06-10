@@ -909,8 +909,12 @@ h4 {
 }
 
 .accordion-item.active .accordion-content {
-    padding: 2rem 2rem 5rem;
+    padding: 4rem 2rem;
     max-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .accordion-content p {
