@@ -788,3 +788,294 @@ h4 {
         transform: rotate(360deg);
     }
 }
+
+/* Page Hero Section */
+.page-hero {
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #2c5f5f;
+}
+
+.page-hero p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* FAQ Styles */
+.faq-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.faq-category {
+    margin-bottom: 4rem;
+}
+
+.faq-category h2 {
+    text-align: left;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #4a9b8e;
+}
+
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background: #f8fffe;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.accordion-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #4a9b8e 0%, #2c5f5f 100%);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: linear-gradient(135deg, #2c5f5f 0%, #1a3a3a 100%);
+}
+
+.accordion-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 1.5rem;
+    max-height: 300px;
+}
+
+.accordion-content p {
+    margin: 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Services Page Styles */
+.services-page {
+    padding: 80px 0;
+    background: white;
+}
+
+.service-category-page {
+    margin-bottom: 5rem;
+}
+
+.service-category-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.service-category-header h2 {
+    margin-bottom: 1rem;
+}
+
+.category-description {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.services-grid-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.service-card {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0f8f6 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(74, 155, 142, 0.1);
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.service-card h3 {
+    color: #2c5f5f;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.service-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4a9b8e;
+    margin-bottom: 1rem;
+}
+
+.service-description {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.service-benefits {
+    list-style: none;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.service-benefits li {
+    padding: 0.3rem 0;
+    color: #555;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.service-benefits li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #4a9b8e;
+    font-weight: bold;
+}
+
+.packages-info {
+    background: linear-gradient(135deg, #2c5f5f 0%, #4a9b8e 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.packages-info h3 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.packages-info p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.services-cta {
+    background: linear-gradient(135deg, #f5f9f5 0%, #e8f4f1 100%);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.services-cta h2 {
+    margin-bottom: 1rem;
+}
+
+.services-cta p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    color: #4a9b8e;
+    font-weight: 600;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Responsive adjustments for new pages */
+@media (max-width: 768px) {
+    .page-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .page-hero p {
+        font-size: 1.1rem;
+    }
+    
+    .services-grid-page {
+        grid-template-columns: 1fr;
+    }
+    
+    .accordion-header h3 {
+        font-size: 1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .services-cta {
+        padding: 3rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-hero {
+        padding: 100px 0 60px;
+    }
+    
+    .service-card {
+        padding: 1.5rem;
+    }
+    
+    .accordion-header {
+        padding: 1rem;
+    }
+    
+    .accordion-item.active .accordion-content {
+        padding: 1rem;
+    }
+}

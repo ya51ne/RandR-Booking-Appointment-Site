@@ -207,6 +207,34 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Accordion functionality for FAQ page
+function toggleAccordion(element) {
+    const accordionItem = element.parentElement;
+    const content = accordionItem.querySelector('.accordion-content');
+    const isActive = accordionItem.classList.contains('active');
+    
+    // Close all other accordion items
+    const allItems = document.querySelectorAll('.accordion-item');
+    allItems.forEach(item => {
+        if (item !== accordionItem) {
+            item.classList.remove('active');
+            const otherContent = item.querySelector('.accordion-content');
+            if (otherContent) {
+                otherContent.style.maxHeight = '0';
+            }
+        }
+    });
+    
+    // Toggle current item
+    if (isActive) {
+        accordionItem.classList.remove('active');
+        content.style.maxHeight = '0';
+    } else {
+        accordionItem.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+    }
+}
+
 // Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
