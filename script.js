@@ -303,6 +303,34 @@ Thank you!
     return Promise.resolve();
 }
 
+// Character counter for additional notes
+const messageTextarea = document.getElementById('message');
+const characterCountElement = document.getElementById('characterCount');
+const characterCounterElement = document.querySelector('.character-counter');
+
+if (messageTextarea && characterCountElement) {
+    messageTextarea.addEventListener('input', function() {
+        const currentLength = this.value.length;
+        const maxLength = 250;
+        
+        // Update character count
+        characterCountElement.textContent = currentLength;
+        
+        // Change color when approaching limit (80% or more)
+        if (currentLength >= maxLength * 0.8) {
+            characterCounterElement.classList.add('warning');
+        } else {
+            characterCounterElement.classList.remove('warning');
+        }
+        
+        // Prevent typing beyond limit (backup to maxlength attribute)
+        if (currentLength >= maxLength) {
+            this.value = this.value.substring(0, maxLength);
+            characterCountElement.textContent = maxLength;
+        }
+    });
+}
+
 // Helper function to create success/error messages
 function createMessage(type, text) {
     const messageDiv = document.createElement('div');

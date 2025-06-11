@@ -206,7 +206,10 @@
                     
                     <div class="form-group">
                         <label for="message">Additional Notes (Optional)</label>
-                        <textarea id="message" name="message" rows="3" placeholder="Any special requirements or questions..."></textarea>
+                        <textarea id="message" name="message" rows="3" placeholder="Any special requirements or questions..." maxlength="250"></textarea>
+                        <div class="character-counter">
+                            <span id="characterCount">0</span>/250 characters
+                        </div>
                     </div>
                     
                     <button type="submit" class="btn-primary">Submit Booking Request</button>

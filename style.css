@@ -923,6 +923,19 @@ h4 {
     font-weight: 600;
 }
 
+.character-counter {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 0.25rem;
+    text-align: right;
+    transition: color 0.3s ease;
+}
+
+.character-counter.warning {
+    color: #dc3545;
+    font-weight: 600;
+}
+
 /* Success/Error States */
 .form-success {
     background: #d4edda;
