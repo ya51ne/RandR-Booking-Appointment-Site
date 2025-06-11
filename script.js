@@ -167,7 +167,7 @@ if (bookingForm) {
             }
         }
         
-        // Validate phone
+        // Validate phone (UK numbers only)
         const phone = formData.get('phone');
         if (!phone || !phone.trim()) {
             showFieldError('phoneError', 'Please enter your phone number.');
@@ -177,19 +177,21 @@ if (bookingForm) {
             // Remove all non-digit characters for validation
             const digitsOnly = trimmedPhone.replace(/\D/g, '');
             
+            // UK phone number validation
+            const ukPhoneRegex = /^(\+44\s?|0)([1-9]\d{8,9})$/;
+            const ukMobileRegex = /^(\+44\s?7|07)([0-9]{9})$/;
+            const ukLandlineRegex = /^(\+44\s?[1-2]|0[1-2])([0-9]{8,9})$/;
+            
             // Check if phone contains only valid characters
-            const phoneRegex = /^[\d\s\-\+\(\)\.]+$/;
-            if (!phoneRegex.test(trimmedPhone)) {
+            const allowedCharsRegex = /^[\d\s\-\+\(\)\.]+$/;
+            if (!allowedCharsRegex.test(trimmedPhone)) {
                 showFieldError('phoneError', 'Phone number can only contain numbers, spaces, hyphens, plus signs, dots, and brackets.');
                 hasErrors = true;
-            } else if (digitsOnly.length < 10) {
-                showFieldError('phoneError', 'Phone number must contain at least 10 digits.');
+            } else if (!ukPhoneRegex.test(digitsOnly) && !ukMobileRegex.test(digitsOnly) && !ukLandlineRegex.test(digitsOnly)) {
+                showFieldError('phoneError', 'Please enter a valid UK phone number (e.g., 07123456789, +44 7123 456789, 01234 567890).');
                 hasErrors = true;
-            } else if (digitsOnly.length > 15) {
-                showFieldError('phoneError', 'Phone number cannot exceed 15 digits.');
-                hasErrors = true;
-            } else if (!/^[\+]?[\d\s\-\(\)\.]{10,}$/.test(trimmedPhone)) {
-                showFieldError('phoneError', 'Please enter a valid phone number format (e.g., +44 1234 567890, 07123456789).');
+            } else if (digitsOnly.length < 10 || digitsOnly.length > 11) {
+                showFieldError('phoneError', 'UK phone numbers must be 10-11 digits long.');
                 hasErrors = true;
             }
         }
@@ -416,14 +418,19 @@ function validateForm(form) {
         }
     }
     
-    // Enhanced phone validation
+    // Enhanced phone validation (UK numbers only)
     const phoneField = form.querySelector('input[type="tel"]');
     if (phoneField && phoneField.value) {
         const trimmedPhone = phoneField.value.trim();
         const digitsOnly = trimmedPhone.replace(/\D/g, '');
-        const phoneRegex = /^[\d\s\-\+\(\)\.]+$/;
+        const allowedCharsRegex = /^[\d\s\-\+\(\)\.]+$/;
+        const ukPhoneRegex = /^(\+44\s?|0)([1-9]\d{8,9})$/;
+        const ukMobileRegex = /^(\+44\s?7|07)([0-9]{9})$/;
+        const ukLandlineRegex = /^(\+44\s?[1-2]|0[1-2])([0-9]{8,9})$/;
         
-        if (!phoneRegex.test(trimmedPhone) || digitsOnly.length < 10 || digitsOnly.length > 15) {
+        if (!allowedCharsRegex.test(trimmedPhone) || 
+            (!ukPhoneRegex.test(digitsOnly) && !ukMobileRegex.test(digitsOnly) && !ukLandlineRegex.test(digitsOnly)) ||
+            digitsOnly.length < 10 || digitsOnly.length > 11) {
             phoneField.classList.add('error');
             isValid = false;
         }
