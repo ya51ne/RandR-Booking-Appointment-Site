@@ -151,9 +151,18 @@ if (bookingForm) {
             showFieldError('emailError', 'Please enter your email address.');
             hasErrors = true;
         } else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showFieldError('emailError', 'Please enter a valid email address.');
+            // Enhanced email validation
+            const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+            const trimmedEmail = email.trim();
+            
+            if (!emailRegex.test(trimmedEmail)) {
+                showFieldError('emailError', 'Please enter a valid email address (e.g., example@email.com).');
+                hasErrors = true;
+            } else if (trimmedEmail.length > 254) {
+                showFieldError('emailError', 'Email address is too long.');
+                hasErrors = true;
+            } else if (trimmedEmail.includes('..')) {
+                showFieldError('emailError', 'Email address cannot contain consecutive dots.');
                 hasErrors = true;
             }
         }
@@ -164,9 +173,23 @@ if (bookingForm) {
             showFieldError('phoneError', 'Please enter your phone number.');
             hasErrors = true;
         } else {
-            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-            if (!phoneRegex.test(phone) || phone.trim().length < 10) {
-                showFieldError('phoneError', 'Please enter a valid phone number.');
+            const trimmedPhone = phone.trim();
+            // Remove all non-digit characters for validation
+            const digitsOnly = trimmedPhone.replace(/\D/g, '');
+            
+            // Check if phone contains only valid characters
+            const phoneRegex = /^[\d\s\-\+\(\)\.]+$/;
+            if (!phoneRegex.test(trimmedPhone)) {
+                showFieldError('phoneError', 'Phone number can only contain numbers, spaces, hyphens, plus signs, dots, and brackets.');
+                hasErrors = true;
+            } else if (digitsOnly.length < 10) {
+                showFieldError('phoneError', 'Phone number must contain at least 10 digits.');
+                hasErrors = true;
+            } else if (digitsOnly.length > 15) {
+                showFieldError('phoneError', 'Phone number cannot exceed 15 digits.');
+                hasErrors = true;
+            } else if (!/^[\+]?[\d\s\-\(\)\.]{10,}$/.test(trimmedPhone)) {
+                showFieldError('phoneError', 'Please enter a valid phone number format (e.g., +44 1234 567890, 07123456789).');
                 hasErrors = true;
             }
         }
@@ -382,21 +405,25 @@ function validateForm(form) {
         }
     });
     
-    // Email validation
+    // Enhanced email validation
     const emailField = form.querySelector('input[type="email"]');
     if (emailField && emailField.value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailField.value)) {
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+        const trimmedEmail = emailField.value.trim();
+        if (!emailRegex.test(trimmedEmail) || trimmedEmail.length > 254 || trimmedEmail.includes('..')) {
             emailField.classList.add('error');
             isValid = false;
         }
     }
     
-    // Phone validation (basic)
+    // Enhanced phone validation
     const phoneField = form.querySelector('input[type="tel"]');
     if (phoneField && phoneField.value) {
-        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-        if (!phoneRegex.test(phoneField.value) || phoneField.value.length < 10) {
+        const trimmedPhone = phoneField.value.trim();
+        const digitsOnly = trimmedPhone.replace(/\D/g, '');
+        const phoneRegex = /^[\d\s\-\+\(\)\.]+$/;
+        
+        if (!phoneRegex.test(trimmedPhone) || digitsOnly.length < 10 || digitsOnly.length > 15) {
             phoneField.classList.add('error');
             isValid = false;
         }
