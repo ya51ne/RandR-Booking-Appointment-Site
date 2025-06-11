@@ -50,6 +50,13 @@ if (dateInput) {
     
     // Show time slots when date is selected
     dateInput.addEventListener('change', function() {
+        // Clear any existing date error when date is selected
+        const dateError = document.getElementById('dateError');
+        if (dateError && this.value) {
+            dateError.textContent = '';
+            dateError.classList.remove('show');
+        }
+        
         if (this.value) {
             timeSlotGroup.style.display = 'block';
             timeSlotSelect.required = true;
@@ -89,6 +96,17 @@ if (dateInput) {
             timeSlotSelect.value = '';
         }
     });
+    
+    // Clear time slot error when time is selected
+    timeSlotSelect.addEventListener('change', function() {
+        if (this.value) {
+            const timeSlotError = document.getElementById('timeSlotError');
+            if (timeSlotError) {
+                timeSlotError.textContent = '';
+                timeSlotError.classList.remove('show');
+            }
+        }
+    });
 }
 
 // Booking form submission
@@ -114,18 +132,70 @@ if (bookingForm) {
         const formData = new FormData(this);
         const selectedServices = formData.getAll('services');
         
-        // Validate service selection
-        if (selectedServices.length === 0) {
-            const errorMessage = createMessage('error', 'Please select at least one service.');
-            this.insertBefore(errorMessage, this.firstChild);
-            submitBtn.classList.remove('btn-loading');
-            submitBtn.disabled = false;
-            return;
+        // Clear any existing error messages
+        clearErrorMessages();
+        
+        // Validate all required fields
+        let hasErrors = false;
+        
+        // Validate name
+        const name = formData.get('name');
+        if (!name || !name.trim()) {
+            showFieldError('nameError', 'Please enter your full name.');
+            hasErrors = true;
         }
         
-        if (selectedServices.length > 10) {
-            const errorMessage = createMessage('error', 'Please select no more than 10 services.');
-            this.insertBefore(errorMessage, this.firstChild);
+        // Validate email
+        const email = formData.get('email');
+        if (!email || !email.trim()) {
+            showFieldError('emailError', 'Please enter your email address.');
+            hasErrors = true;
+        } else {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showFieldError('emailError', 'Please enter a valid email address.');
+                hasErrors = true;
+            }
+        }
+        
+        // Validate phone
+        const phone = formData.get('phone');
+        if (!phone || !phone.trim()) {
+            showFieldError('phoneError', 'Please enter your phone number.');
+            hasErrors = true;
+        } else {
+            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+            if (!phoneRegex.test(phone) || phone.trim().length < 10) {
+                showFieldError('phoneError', 'Please enter a valid phone number.');
+                hasErrors = true;
+            }
+        }
+        
+        // Validate services selection
+        if (selectedServices.length === 0) {
+            showFieldError('servicesError', 'Please select at least one service.');
+            hasErrors = true;
+        } else if (selectedServices.length > 10) {
+            showFieldError('servicesError', 'Please select no more than 10 services.');
+            hasErrors = true;
+        }
+        
+        // Validate date
+        const date = formData.get('date');
+        if (!date || !date.trim()) {
+            showFieldError('dateError', 'Please select your preferred date.');
+            hasErrors = true;
+        }
+        
+        // Validate time slot (only if date is selected)
+        const timeSlot = formData.get('timeSlot');
+        if (date && date.trim() && (!timeSlot || !timeSlot.trim())) {
+            showFieldError('timeSlotError', 'Please select your preferred time.');
+            hasErrors = true;
+        }
+        
+        // If there are errors, stop submission
+        if (hasErrors) {
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
             return;
@@ -214,6 +284,24 @@ function createMessage(type, text) {
     messageDiv.className = `form-${type}`;
     messageDiv.textContent = text;
     return messageDiv;
+}
+
+// Helper function to show field error messages
+function showFieldError(elementId, message) {
+    const errorElement = document.getElementById(elementId);
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.add('show');
+    }
+}
+
+// Helper function to clear all error messages
+function clearErrorMessages() {
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach(error => {
+        error.textContent = '';
+        error.classList.remove('show');
+    });
 }
 
 // Multiple services selection handling
