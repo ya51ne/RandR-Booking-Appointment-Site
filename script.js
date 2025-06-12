@@ -139,7 +139,7 @@ if (bookingForm) {
         let hasErrors = false;
         
         // Validate name
-        const name = formData.get('name');
+        const name = formData.get('fullName');
         if (!name || !name.trim()) {
             showFieldError('nameError', 'Please enter your full name.');
             hasErrors = true;
@@ -206,14 +206,14 @@ if (bookingForm) {
         }
         
         // Validate date
-        const date = formData.get('date');
+        const date = formData.get('preferredDate');
         if (!date || !date.trim()) {
             showFieldError('dateError', 'Please select your preferred date.');
             hasErrors = true;
         }
         
         // Validate time slot (only if date is selected)
-        const timeSlot = formData.get('timeSlot');
+        const timeSlot = formData.get('preferredTime');
         if (date && date.trim() && (!timeSlot || !timeSlot.trim())) {
             showFieldError('timeSlotError', 'Please select your preferred time.');
             hasErrors = true;
