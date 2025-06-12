@@ -227,34 +227,62 @@ if (bookingForm) {
         }
         
         const bookingData = {
-            name: formData.get('name'),
+            fullName: formData.get('fullName') || formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
             services: selectedServices,
-            date: formData.get('date'),
-            timeSlot: formData.get('timeSlot'),
-            message: formData.get('message') || 'No additional notes'
+            preferredDate: formData.get('preferredDate') || formData.get('date'),
+            preferredTime: formData.get('preferredTime') || formData.get('timeSlot'),
+            additionalNotes: formData.get('additionalNotes') || formData.get('message') || 'No additional notes',
+            submittedAt: new Date().toISOString()
         };
         
         try {
-            // Simulate form submission (replace with actual endpoint)
-            await simulateBookingSubmission(bookingData);
+            // Submit to N8N webhook
+            const response = await fetch('https://ya51ne.app.n8n.cloud/webhook/booking-webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData)
+            });
             
-            // Show success message
-            const successMessage = createMessage('success', 
-                'Booking request submitted successfully! Zeena will contact you within 24 hours to confirm your appointment.');
-            this.insertBefore(successMessage, this.firstChild);
-            
-            // Reset form
-            this.reset();
-            
-            // Scroll to top of form to show message
-            this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (response.ok) {
+                // Show success message
+                const successMessage = createMessage('success', 
+                    'Booking request submitted successfully! Zeena will contact you within 24 hours to confirm your appointment.');
+                this.insertBefore(successMessage, this.firstChild);
+                
+                // Reset form
+                this.reset();
+                
+                // Reset services selection display
+                const selectedCountElement = document.getElementById('selectedCount');
+                const estimatedTotalElement = document.getElementById('estimatedTotal');
+                if (selectedCountElement) selectedCountElement.textContent = '0';
+                if (estimatedTotalElement) estimatedTotalElement.textContent = '';
+                
+                // Hide time slot group
+                const timeSlotGroup = document.getElementById('timeSlotGroup');
+                if (timeSlotGroup) timeSlotGroup.style.display = 'none';
+                
+                // Reset character counter
+                const characterCountElement = document.getElementById('characterCount');
+                const characterCounterElement = document.querySelector('.character-counter');
+                if (characterCountElement) characterCountElement.textContent = '0';
+                if (characterCounterElement) characterCounterElement.classList.remove('warning');
+                
+                // Scroll to top of form to show message
+                this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                throw new Error('Network response was not ok');
+            }
             
         } catch (error) {
+            console.error('Booking submission error:', error);
             // Show error message
             const errorMessage = createMessage('error', 
-                'Sorry, there was an error submitting your booking. Please call 07561758019 directly to book your appointment.');
+                'Sorry, there was an error submitting your booking. Please try again or contact Zeena directly at zeena.randr@gmail.com.');
             this.insertBefore(errorMessage, this.firstChild);
         } finally {
             // Reset button state
