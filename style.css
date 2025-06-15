@@ -535,6 +535,7 @@ h4 {
 .contact-info-box p {
     margin-bottom: 0.75rem;
     line-height: 1.5;
+    color: white;
 }
 
 .contact-info-box p:last-child {
