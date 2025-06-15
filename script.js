@@ -256,21 +256,44 @@ if (bookingForm) {
                 // Reset form
                 this.reset();
                 
+                // Reset services selection visual state
+                const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
+                serviceCheckboxes.forEach(checkbox => {
+                    const parentLabel = checkbox.closest('.service-checkbox');
+                    parentLabel.classList.remove('selected');
+                    checkbox.disabled = false;
+                    checkbox.parentElement.style.opacity = '1';
+                });
+                
                 // Reset services selection display
                 const selectedCountElement = document.getElementById('selectedCount');
                 const estimatedTotalElement = document.getElementById('estimatedTotal');
                 if (selectedCountElement) selectedCountElement.textContent = '0';
                 if (estimatedTotalElement) estimatedTotalElement.textContent = '';
                 
-                // Hide time slot group
+                // Hide time slot group and reset time slot
                 const timeSlotGroup = document.getElementById('timeSlotGroup');
+                const timeSlotSelect = document.getElementById('timeSlot');
                 if (timeSlotGroup) timeSlotGroup.style.display = 'none';
+                if (timeSlotSelect) {
+                    timeSlotSelect.required = false;
+                    timeSlotSelect.value = '';
+                    // Re-enable all time slot options
+                    const options = timeSlotSelect.querySelectorAll('option');
+                    options.forEach(option => {
+                        option.disabled = false;
+                        option.style.color = '';
+                    });
+                }
                 
                 // Reset character counter
                 const characterCountElement = document.getElementById('characterCount');
                 const characterCounterElement = document.querySelector('.character-counter');
                 if (characterCountElement) characterCountElement.textContent = '0';
                 if (characterCounterElement) characterCounterElement.classList.remove('warning');
+                
+                // Clear any lingering error messages
+                clearErrorMessages();
                 
                 // Scroll to top of form to show message
                 this.scrollIntoView({ behavior: 'smooth', block: 'start' });
