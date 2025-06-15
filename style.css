@@ -524,6 +524,35 @@ h4 {
     gap: 0.5rem;
 }
 
+.contact-info-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.contact-info-box p {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.contact-info-box p:last-child {
+    margin-bottom: 0;
+}
+
+.email-contact-link {
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.email-contact-link:hover {
+    color: #d4a574;
+    text-shadow: 0 0 5px rgba(212, 165, 116, 0.5);
+}
+
 /* Contact Section */
 .contact {
     padding: 100px 0;
