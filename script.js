@@ -663,40 +663,40 @@ function toggleAccordion(element) {
     }
 }
 
-// Function to load available times from GitHub
-async function loadAvailableTimesFromGitHub() {
+// Function to load unavailable times from GitHub
+async function loadUnavailableTimesFromGitHub() {
     try {
-        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json");
+        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json");
         if (response.ok) {
-            const availableTimes = await response.json();
-            return availableTimes;
+            const unavailableTimes = await response.json();
+            return unavailableTimes;
         } else {
-            console.warn("Could not load available times from GitHub, using default times");
+            console.warn("Could not load unavailable times from GitHub, using default times");
             return null;
         }
     } catch (error) {
-        console.error("Error loading available times from GitHub:", error);
+        console.error("Error loading unavailable times from GitHub:", error);
         return null;
     }
 }
 
-// Function to update time slots with GitHub availability data
+// Function to update time slots with GitHub unavailability data
 async function updateTimeSlotWithGitHubData(selectedDate) {
     const options = timeSlotSelect.querySelectorAll('option');
 
     // First apply local cupping bookings
     updateTimeSlotAvailability(selectedDate);
 
-    // Then apply GitHub availability data
-    const availableTimes = await loadAvailableTimesFromGitHub();
+    // Then apply GitHub unavailability data
+    const unavailableTimes = await loadUnavailableTimesFromGitHub();
 
-    if (availableTimes && Array.isArray(availableTimes)) {
+    if (unavailableTimes && Array.isArray(unavailableTimes)) {
         options.forEach(option => {
             if (option.value) {
                 const timeValue = option.value;
-                const isAvailableOnGitHub = availableTimes.includes(timeValue);
+                const isUnavailableOnGitHub = unavailableTimes.includes(timeValue);
 
-                if (!isAvailableOnGitHub) {
+                if (isUnavailableOnGitHub) {
                     option.disabled = true;
                     option.style.color = '#ccc';
                     if (!option.textContent.includes('(Unavailable)')) {
