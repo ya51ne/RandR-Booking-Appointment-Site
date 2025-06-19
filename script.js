@@ -133,7 +133,7 @@ if (dateInput) {
     dateInput.setAttribute('min', today);
 
     // Show time slots when date is selected
-    dateInput.addEventListener('change', function() {
+    dateInput.addEventListener('change', async function() {
         // Clear any existing date error when date is selected
         const dateError = document.getElementById('dateError');
         if (dateError && this.value) {
@@ -145,8 +145,37 @@ if (dateInput) {
             timeSlotGroup.style.display = 'block';
             timeSlotSelect.required = true;
 
-            // Update time slot availability including cupping bookings
-            updateTimeSlotAvailability(this.value);
+            // Reset all options first
+            const options = timeSlotSelect.querySelectorAll('option');
+            options.forEach(option => {
+                if (option.value) {
+                    option.disabled = false;
+                    option.style.color = '';
+                    option.textContent = option.textContent.replace(' (Unavailable)', '');
+                }
+            });
+
+            // Apply time restrictions for today
+            const selectedDate = new Date(this.value);
+            const today = new Date();
+            const isToday = selectedDate.toDateString() === today.toDateString();
+
+            if (isToday) {
+                const currentHour = today.getHours();
+                options.forEach(option => {
+                    if (option.value) {
+                        const slotHour = parseInt(option.value.split(':')[0]);
+                        if (slotHour <= currentHour) {
+                            option.disabled = true;
+                            option.style.color = '#ccc';
+                            option.textContent = option.textContent.replace(' (Past time)', '') + ' (Past time)';
+                        }
+                    }
+                });
+            }
+
+            // Update time slot availability including cupping bookings and GitHub data
+            await updateTimeSlotWithGitHubData(this.value);
         } else {
             timeSlotGroup.style.display = 'none';
             timeSlotSelect.required = false;
@@ -541,7 +570,7 @@ function handleServiceSelection() {
     const dateValue = dateInput ? dateInput.value : null;
     if (dateValue && timeSlotSelect) {
         const selectedServices = Array.from(checkedBoxes).map(cb => cb.value);
-        updateTimeSlotAvailability(dateValue);
+        updateTimeSlotWithGitHubData(dateValue);
     }
 }
 
@@ -634,6 +663,51 @@ function toggleAccordion(element) {
     }
 }
 
+// Function to load available times from GitHub
+async function loadAvailableTimesFromGitHub() {
+    try {
+        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json?token=GHSAT0AAAAAADE5GY4V5MUHN66W6JBXBYBY2CTUVGQ");
+        if (response.ok) {
+            const availableTimes = await response.json();
+            return availableTimes;
+        } else {
+            console.warn("Could not load available times from GitHub, using default times");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error loading available times from GitHub:", error);
+        return null;
+    }
+}
+
+// Function to update time slots with GitHub availability data
+async function updateTimeSlotWithGitHubData(selectedDate) {
+    const options = timeSlotSelect.querySelectorAll('option');
+    
+    // First apply local cupping bookings
+    updateTimeSlotAvailability(selectedDate);
+    
+    // Then apply GitHub availability data
+    const availableTimes = await loadAvailableTimesFromGitHub();
+    
+    if (availableTimes && Array.isArray(availableTimes)) {
+        options.forEach(option => {
+            if (option.value) {
+                const timeValue = option.value;
+                const isAvailableOnGitHub = availableTimes.includes(timeValue);
+                
+                if (!isAvailableOnGitHub) {
+                    option.disabled = true;
+                    option.style.color = '#ccc';
+                    if (!option.textContent.includes('(Unavailable)')) {
+                        option.textContent = option.textContent.replace(' (Unavailable)', '') + ' (Unavailable)';
+                    }
+                }
+            }
+        });
+    }
+}
+
 // Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
@@ -660,28 +734,3 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
-<script>
-    fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json?token=GHSAT0AAAAAADE5GY4V5MUHN66W6JBXBYBY2CTUVGQ")
-    .then(response => response.json())
-    .then(times => {
-      const dropdown = document.getElementById("timeDropdown");
-    dropdown.innerHTML = ""; // Clear any old options
-
-    if (times.length === 0) {
-        const option = document.createElement("option");
-    option.textContent = "No available times";
-    dropdown.appendChild(option);
-    return;
-      }
-
-      times.forEach(time => {
-        const option = document.createElement("option");
-    option.value = time;
-    option.textContent = time;
-    dropdown.appendChild(option);
-      });
-    })
-    .catch(error => {
-        console.error("Error loading available times:", error);
-    });
-</script>
