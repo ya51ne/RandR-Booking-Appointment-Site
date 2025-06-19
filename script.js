@@ -250,7 +250,7 @@ if (bookingForm) {
             if (response.ok) {
                 // Show success message
                 const successMessage = createMessage('success', 
-                    'Booking request submitted successfully! Zeena will contact you within 24 hours to confirm your appointment.');
+                    'Thank you for your booking request! Our team at R&R will contact you within 24 hours to confirm your appointment. We look forward to helping you rejuvenate and revitalise!');
                 this.insertBefore(successMessage, this.firstChild);
                 
                 // Reset form
@@ -305,7 +305,7 @@ if (bookingForm) {
             console.error('Booking submission error:', error);
             // Show error message
             const errorMessage = createMessage('error', 
-                'Sorry, there was an error submitting your booking. Please try again or contact Zeena directly at zeena.randr@gmail.com.');
+                'Sorry, there was an error submitting your booking. Please try again or contact us directly at rejuvenate.revitalise@gmail.com.');
             this.insertBefore(errorMessage, this.firstChild);
         } finally {
             // Reset button state
@@ -328,7 +328,7 @@ async function simulateBookingSubmission(data) {
     const servicesText = Array.isArray(data.services) ? data.services.join(', ') : data.services;
     const emailSubject = encodeURIComponent(`Booking Request - ${servicesText}`);
     const emailBody = encodeURIComponent(`
-Hello Zeena,
+Hello R&R Team,
 
 I would like to book an appointment for the following:
 
