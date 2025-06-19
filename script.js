@@ -666,7 +666,7 @@ function toggleAccordion(element) {
 // Function to load available times from GitHub
 async function loadAvailableTimesFromGitHub() {
     try {
-        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json?token=GHSAT0AAAAAADE5GY4V5MUHN66W6JBXBYBY2CTUVGQ");
+        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json");
         if (response.ok) {
             const availableTimes = await response.json();
             return availableTimes;
@@ -683,19 +683,19 @@ async function loadAvailableTimesFromGitHub() {
 // Function to update time slots with GitHub availability data
 async function updateTimeSlotWithGitHubData(selectedDate) {
     const options = timeSlotSelect.querySelectorAll('option');
-    
+
     // First apply local cupping bookings
     updateTimeSlotAvailability(selectedDate);
-    
+
     // Then apply GitHub availability data
     const availableTimes = await loadAvailableTimesFromGitHub();
-    
+
     if (availableTimes && Array.isArray(availableTimes)) {
         options.forEach(option => {
             if (option.value) {
                 const timeValue = option.value;
                 const isAvailableOnGitHub = availableTimes.includes(timeValue);
-                
+
                 if (!isAvailableOnGitHub) {
                     option.disabled = true;
                     option.style.color = '#ccc';
