@@ -16,7 +16,7 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -84,11 +84,11 @@ function isCuppingSlotBooked(date, timeSlot) {
 // Function to update time slot availability based on cupping bookings
 function updateTimeSlotAvailability(selectedDate) {
     const options = timeSlotSelect.querySelectorAll('option');
-    
+
     options.forEach(option => {
         if (option.value) {
             const isBookedForCupping = isCuppingSlotBooked(selectedDate, option.value);
-            
+
             if (isBookedForCupping) {
                 option.disabled = true;
                 option.style.color = '#ccc';
@@ -98,7 +98,7 @@ function updateTimeSlotAvailability(selectedDate) {
                 const selectedDate = new Date(dateInput.value);
                 const today = new Date();
                 const isToday = selectedDate.toDateString() === today.toDateString();
-                
+
                 if (isToday) {
                     const currentHour = today.getHours();
                     const slotHour = parseInt(option.value.split(':')[0]);
@@ -131,7 +131,7 @@ const timeSlotSelect = document.getElementById('timeSlot');
 if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
-    
+
     // Show time slots when date is selected
     dateInput.addEventListener('change', function() {
         // Clear any existing date error when date is selected
@@ -140,11 +140,11 @@ if (dateInput) {
             dateError.textContent = '';
             dateError.classList.remove('show');
         }
-        
+
         if (this.value) {
             timeSlotGroup.style.display = 'block';
             timeSlotSelect.required = true;
-            
+
             // Update time slot availability including cupping bookings
             updateTimeSlotAvailability(this.value);
         } else {
@@ -153,7 +153,7 @@ if (dateInput) {
             timeSlotSelect.value = '';
         }
     });
-    
+
     // Clear time slot error when time is selected
     timeSlotSelect.addEventListener('change', function() {
         if (this.value) {
@@ -171,37 +171,37 @@ const bookingForm = document.getElementById('bookingForm');
 if (bookingForm) {
     bookingForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
-        
+
         // Show loading state
         submitBtn.classList.add('btn-loading');
         submitBtn.disabled = true;
-        
+
         // Remove any existing messages
         const existingMessage = this.querySelector('.form-success, .form-error');
         if (existingMessage) {
             existingMessage.remove();
         }
-        
+
         // Collect form data
         const formData = new FormData(this);
         const selectedServices = formData.getAll('services');
-        
+
         // Clear any existing error messages
         clearErrorMessages();
-        
+
         // Validate all required fields
         let hasErrors = false;
-        
+
         // Validate name
         const name = formData.get('fullName');
         if (!name || !name.trim()) {
             showFieldError('nameError', 'Please enter your full name.');
             hasErrors = true;
         }
-        
+
         // Validate email
         const email = formData.get('email');
         if (!email || !email.trim()) {
@@ -211,7 +211,7 @@ if (bookingForm) {
             // Enhanced email validation
             const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
             const trimmedEmail = email.trim();
-            
+
             if (!emailRegex.test(trimmedEmail)) {
                 showFieldError('emailError', 'Please enter a valid email address (e.g., example@email.com).');
                 hasErrors = true;
@@ -223,7 +223,7 @@ if (bookingForm) {
                 hasErrors = true;
             }
         }
-        
+
         // Validate phone (UK numbers only)
         const phone = formData.get('phone');
         if (!phone || !phone.trim()) {
@@ -233,12 +233,12 @@ if (bookingForm) {
             const trimmedPhone = phone.trim();
             // Remove all non-digit characters for validation
             const digitsOnly = trimmedPhone.replace(/\D/g, '');
-            
+
             // UK phone number validation
             const ukPhoneRegex = /^(\+44\s?|0)([1-9]\d{8,9})$/;
             const ukMobileRegex = /^(\+44\s?7|07)([0-9]{9})$/;
             const ukLandlineRegex = /^(\+44\s?[1-2]|0[1-2])([0-9]{8,9})$/;
-            
+
             // Check if phone contains only valid characters
             const allowedCharsRegex = /^[\d\s\-\+\(\)\.]+$/;
             if (!allowedCharsRegex.test(trimmedPhone)) {
@@ -252,7 +252,7 @@ if (bookingForm) {
                 hasErrors = true;
             }
         }
-        
+
         // Validate services selection
         if (selectedServices.length === 0) {
             showFieldError('servicesError', 'Please select at least one service.');
@@ -261,28 +261,28 @@ if (bookingForm) {
             showFieldError('servicesError', 'Please select no more than 10 services.');
             hasErrors = true;
         }
-        
+
         // Validate date
         const date = formData.get('preferredDate');
         if (!date || !date.trim()) {
             showFieldError('dateError', 'Please select your preferred date.');
             hasErrors = true;
         }
-        
+
         // Validate time slot (only if date is selected)
         const timeSlot = formData.get('preferredTime');
         if (date && date.trim() && (!timeSlot || !timeSlot.trim())) {
             showFieldError('timeSlotError', 'Please select your preferred time.');
             hasErrors = true;
         }
-        
+
         // If there are errors, stop submission
         if (hasErrors) {
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
             return;
         }
-        
+
         const bookingData = {
             fullName: formData.get('fullName') || formData.get('name'),
             email: formData.get('email'),
@@ -293,7 +293,7 @@ if (bookingForm) {
             additionalNotes: formData.get('additionalNotes') || formData.get('message') || 'No additional notes',
             submittedAt: new Date().toISOString()
         };
-        
+
         try {
             // Submit to N8N webhook
             const response = await fetch('https://ya51ne.app.n8n.cloud/webhook/booking-webhook', {
@@ -303,25 +303,25 @@ if (bookingForm) {
                 },
                 body: JSON.stringify(bookingData)
             });
-            
+
             if (response.ok) {
                 // Check if cupping services were booked and mark time slot as unavailable
                 const selectedServices = formData.getAll('services');
                 const preferredDate = formData.get('preferredDate');
                 const preferredTime = formData.get('preferredTime');
-                
+
                 if (hasCuppingServices(selectedServices) && preferredDate && preferredTime) {
                     markCuppingSlotAsBooked(preferredDate, preferredTime);
                 }
-                
+
                 // Show success message
-                const successMessage = createMessage('success', 
+                const successMessage = createMessage('success',
                     'Thank you for your booking request! Our team at R&R will contact you within 24 hours to confirm your appointment. We look forward to helping you rejuvenate and revitalise!');
                 this.insertBefore(successMessage, this.firstChild);
-                
+
                 // Reset form
                 this.reset();
-                
+
                 // Reset services selection visual state
                 const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
                 serviceCheckboxes.forEach(checkbox => {
@@ -330,13 +330,13 @@ if (bookingForm) {
                     checkbox.disabled = false;
                     checkbox.parentElement.style.opacity = '1';
                 });
-                
+
                 // Reset services selection display
                 const selectedCountElement = document.getElementById('selectedCount');
                 const estimatedTotalElement = document.getElementById('estimatedTotal');
                 if (selectedCountElement) selectedCountElement.textContent = '0';
                 if (estimatedTotalElement) estimatedTotalElement.textContent = '';
-                
+
                 // Hide time slot group and reset time slot
                 const timeSlotGroup = document.getElementById('timeSlotGroup');
                 const timeSlotSelect = document.getElementById('timeSlot');
@@ -351,26 +351,26 @@ if (bookingForm) {
                         option.style.color = '';
                     });
                 }
-                
+
                 // Reset character counter
                 const characterCountElement = document.getElementById('characterCount');
                 const characterCounterElement = document.querySelector('.character-counter');
                 if (characterCountElement) characterCountElement.textContent = '0';
                 if (characterCounterElement) characterCounterElement.classList.remove('warning');
-                
+
                 // Clear any lingering error messages
                 clearErrorMessages();
-                
+
                 // Scroll to top of form to show message
                 this.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 throw new Error('Network response was not ok');
             }
-            
+
         } catch (error) {
             console.error('Booking submission error:', error);
             // Show error message
-            const errorMessage = createMessage('error', 
+            const errorMessage = createMessage('error',
                 'Sorry, there was an error submitting your booking. Please try again or contact us directly at rejuvenate.revitalise@gmail.com.');
             this.insertBefore(errorMessage, this.firstChild);
         } finally {
@@ -386,10 +386,10 @@ if (bookingForm) {
 async function simulateBookingSubmission(data) {
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // Log booking data (in real implementation, this would send to a server)
     console.log('Booking submitted:', data);
-    
+
     // Create email link for fallback
     const servicesText = Array.isArray(data.services) ? data.services.join(', ') : data.services;
     const emailSubject = encodeURIComponent(`Booking Request - ${servicesText}`);
@@ -410,13 +410,13 @@ Please contact me to confirm the appointment.
 
 Thank you!
     `);
-    
+
     // For now, we'll just simulate success
     // In a real implementation, you could:
     // 1. Send to a backend API
     // 2. Use a service like Formspree or Netlify Forms
     // 3. Integrate with booking systems like Calendly
-    
+
     return Promise.resolve();
 }
 
@@ -429,17 +429,17 @@ if (messageTextarea && characterCountElement) {
     messageTextarea.addEventListener('input', function() {
         const currentLength = this.value.length;
         const maxLength = 250;
-        
+
         // Update character count
         characterCountElement.textContent = currentLength;
-        
+
         // Change color when approaching limit (80% or more)
         if (currentLength >= maxLength * 0.8) {
             characterCounterElement.classList.add('warning');
         } else {
             characterCounterElement.classList.remove('warning');
         }
-        
+
         // Prevent typing beyond limit (backup to maxlength attribute)
         if (currentLength >= maxLength) {
             this.value = this.value.substring(0, maxLength);
@@ -488,7 +488,7 @@ if (serviceCheckboxes.length > 0) {
 function handleServiceSelection() {
     const checkedBoxes = document.querySelectorAll('input[name="services"]:checked');
     const count = checkedBoxes.length;
-    
+
     // Update visual feedback for selected services
     serviceCheckboxes.forEach(checkbox => {
         const parentLabel = checkbox.closest('.service-checkbox');
@@ -498,19 +498,19 @@ function handleServiceSelection() {
             parentLabel.classList.remove('selected');
         }
     });
-    
+
     // Update selected count
     if (selectedCountElement) {
         selectedCountElement.textContent = count;
     }
-    
+
     // Calculate estimated total
     let total = 0;
     checkedBoxes.forEach(checkbox => {
         const price = parseInt(checkbox.dataset.price);
         total += price;
     });
-    
+
     // Update estimated total display
     if (estimatedTotalElement) {
         if (count > 0) {
@@ -519,7 +519,7 @@ function handleServiceSelection() {
             estimatedTotalElement.textContent = '';
         }
     }
-    
+
     // Enforce 1-10 services limit
     if (count >= 10) {
         // Disable unchecked boxes when 10 are selected
@@ -536,7 +536,7 @@ function handleServiceSelection() {
             checkbox.parentElement.style.opacity = '1';
         });
     }
-    
+
     // Update time slot availability if date is selected and cupping services are involved
     const dateValue = dateInput ? dateInput.value : null;
     if (dateValue && timeSlotSelect) {
@@ -549,7 +549,7 @@ function handleServiceSelection() {
 function validateForm(form) {
     const requiredFields = form.querySelectorAll('[required]');
     let isValid = true;
-    
+
     requiredFields.forEach(field => {
         if (!field.value.trim()) {
             field.classList.add('error');
@@ -558,7 +558,7 @@ function validateForm(form) {
             field.classList.remove('error');
         }
     });
-    
+
     // Enhanced email validation
     const emailField = form.querySelector('input[type="email"]');
     if (emailField && emailField.value) {
@@ -569,7 +569,7 @@ function validateForm(form) {
             isValid = false;
         }
     }
-    
+
     // Enhanced phone validation (UK numbers only)
     const phoneField = form.querySelector('input[type="tel"]');
     if (phoneField && phoneField.value) {
@@ -579,15 +579,15 @@ function validateForm(form) {
         const ukPhoneRegex = /^(\+44\s?|0)([1-9]\d{8,9})$/;
         const ukMobileRegex = /^(\+44\s?7|07)([0-9]{9})$/;
         const ukLandlineRegex = /^(\+44\s?[1-2]|0[1-2])([0-9]{8,9})$/;
-        
-        if (!allowedCharsRegex.test(trimmedPhone) || 
+
+        if (!allowedCharsRegex.test(trimmedPhone) ||
             (!ukPhoneRegex.test(digitsOnly) && !ukMobileRegex.test(digitsOnly) && !ukLandlineRegex.test(digitsOnly)) ||
             digitsOnly.length < 10 || digitsOnly.length > 11) {
             phoneField.classList.add('error');
             isValid = false;
         }
     }
-    
+
     return isValid;
 }
 
@@ -608,7 +608,7 @@ function toggleAccordion(element) {
     const accordionItem = element.parentElement;
     const content = accordionItem.querySelector('.accordion-content');
     const isActive = accordionItem.classList.contains('active');
-    
+
     // Close all other accordion items
     const allItems = document.querySelectorAll('.accordion-item');
     allItems.forEach(item => {
@@ -620,7 +620,7 @@ function toggleAccordion(element) {
             }
         }
     });
-    
+
     // Toggle current item
     if (isActive) {
         accordionItem.classList.remove('active');
@@ -652,7 +652,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.service-category, .feature, .contact-item');
-    
+
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -660,3 +660,28 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
+<script>
+    fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json?token=GHSAT0AAAAAADE5GY4V5MUHN66W6JBXBYBY2CTUVGQ")
+    .then(response => response.json())
+    .then(times => {
+      const dropdown = document.getElementById("timeDropdown");
+    dropdown.innerHTML = ""; // Clear any old options
+
+    if (times.length === 0) {
+        const option = document.createElement("option");
+    option.textContent = "No available times";
+    dropdown.appendChild(option);
+    return;
+      }
+
+      times.forEach(time => {
+        const option = document.createElement("option");
+    option.value = time;
+    option.textContent = time;
+    dropdown.appendChild(option);
+      });
+    })
+    .catch(error => {
+        console.error("Error loading available times:", error);
+    });
+</script>
