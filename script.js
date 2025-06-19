@@ -39,6 +39,90 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Time slot availability tracking for cupping treatments
+let bookedCuppingSlots = {};
+
+// Function to load booked cupping slots from localStorage or server
+function loadBookedCuppingSlots() {
+    const stored = localStorage.getItem('bookedCuppingSlots');
+    if (stored) {
+        bookedCuppingSlots = JSON.parse(stored);
+    }
+}
+
+// Function to save booked cupping slots
+function saveBookedCuppingSlots() {
+    localStorage.setItem('bookedCuppingSlots', JSON.stringify(bookedCuppingSlots));
+}
+
+// Function to check if a service is a cupping treatment
+function isCuppingService(service) {
+    return service.toLowerCase().includes('cupping') || service.toLowerCase().includes('hijama');
+}
+
+// Function to check if selected services include cupping
+function hasCuppingServices(selectedServices) {
+    return selectedServices.some(service => isCuppingService(service));
+}
+
+// Function to mark time slot as booked for cupping
+function markCuppingSlotAsBooked(date, timeSlot) {
+    if (!bookedCuppingSlots[date]) {
+        bookedCuppingSlots[date] = [];
+    }
+    if (!bookedCuppingSlots[date].includes(timeSlot)) {
+        bookedCuppingSlots[date].push(timeSlot);
+        saveBookedCuppingSlots();
+    }
+}
+
+// Function to check if a time slot is booked for cupping
+function isCuppingSlotBooked(date, timeSlot) {
+    return bookedCuppingSlots[date] && bookedCuppingSlots[date].includes(timeSlot);
+}
+
+// Function to update time slot availability based on cupping bookings
+function updateTimeSlotAvailability(selectedDate) {
+    const options = timeSlotSelect.querySelectorAll('option');
+    
+    options.forEach(option => {
+        if (option.value) {
+            const isBookedForCupping = isCuppingSlotBooked(selectedDate, option.value);
+            
+            if (isBookedForCupping) {
+                option.disabled = true;
+                option.style.color = '#ccc';
+                option.textContent = option.textContent.replace(' (Unavailable)', '') + ' (Unavailable)';
+            } else {
+                // Only enable if not disabled by other conditions (like past time)
+                const selectedDate = new Date(dateInput.value);
+                const today = new Date();
+                const isToday = selectedDate.toDateString() === today.toDateString();
+                
+                if (isToday) {
+                    const currentHour = today.getHours();
+                    const slotHour = parseInt(option.value.split(':')[0]);
+                    if (slotHour <= currentHour) {
+                        option.disabled = true;
+                        option.style.color = '#ccc';
+                    } else {
+                        option.disabled = false;
+                        option.style.color = '';
+                        option.textContent = option.textContent.replace(' (Unavailable)', '');
+                    }
+                } else {
+                    option.disabled = false;
+                    option.style.color = '';
+                    option.textContent = option.textContent.replace(' (Unavailable)', '');
+                }
+            }
+        }
+    });
+}
+
+// Initialize booked slots on page load
+loadBookedCuppingSlots();
+
 // Set minimum date for booking to today
 const dateInput = document.getElementById('date');
 const timeSlotGroup = document.getElementById('timeSlotGroup');
@@ -61,35 +145,8 @@ if (dateInput) {
             timeSlotGroup.style.display = 'block';
             timeSlotSelect.required = true;
             
-            // Check if selected date is today and disable past time slots
-            const selectedDate = new Date(this.value);
-            const today = new Date();
-            const isToday = selectedDate.toDateString() === today.toDateString();
-            
-            if (isToday) {
-                const currentHour = today.getHours();
-                const options = timeSlotSelect.querySelectorAll('option');
-                
-                options.forEach(option => {
-                    if (option.value) {
-                        const slotHour = parseInt(option.value.split(':')[0]);
-                        if (slotHour <= currentHour) {
-                            option.disabled = true;
-                            option.style.color = '#ccc';
-                        } else {
-                            option.disabled = false;
-                            option.style.color = '';
-                        }
-                    }
-                });
-            } else {
-                // Enable all time slots for future dates
-                const options = timeSlotSelect.querySelectorAll('option');
-                options.forEach(option => {
-                    option.disabled = false;
-                    option.style.color = '';
-                });
-            }
+            // Update time slot availability including cupping bookings
+            updateTimeSlotAvailability(this.value);
         } else {
             timeSlotGroup.style.display = 'none';
             timeSlotSelect.required = false;
@@ -248,6 +305,15 @@ if (bookingForm) {
             });
             
             if (response.ok) {
+                // Check if cupping services were booked and mark time slot as unavailable
+                const selectedServices = formData.getAll('services');
+                const preferredDate = formData.get('preferredDate');
+                const preferredTime = formData.get('preferredTime');
+                
+                if (hasCuppingServices(selectedServices) && preferredDate && preferredTime) {
+                    markCuppingSlotAsBooked(preferredDate, preferredTime);
+                }
+                
                 // Show success message
                 const successMessage = createMessage('success', 
                     'Thank you for your booking request! Our team at R&R will contact you within 24 hours to confirm your appointment. We look forward to helping you rejuvenate and revitalise!');
@@ -469,6 +535,13 @@ function handleServiceSelection() {
             checkbox.disabled = false;
             checkbox.parentElement.style.opacity = '1';
         });
+    }
+    
+    // Update time slot availability if date is selected and cupping services are involved
+    const dateValue = dateInput ? dateInput.value : null;
+    if (dateValue && timeSlotSelect) {
+        const selectedServices = Array.from(checkedBoxes).map(cb => cb.value);
+        updateTimeSlotAvailability(dateValue);
     }
 }
 
