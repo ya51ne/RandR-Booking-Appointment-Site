@@ -680,28 +680,54 @@ async function loadUnavailableTimesFromGitHub() {
     }
 }
 
-// Function to update time slots with GitHub unavailability data
+// Helper: Fetch blocked times JSON from GitHub
+async function loadUnavailableTimesFromGitHub() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json');
+        if (!response.ok) throw new Error('Failed to load blocked times');
+        const data = await response.json();
+        return data; // Example: ["2025-06-26 09:00", "2025-06-27 14:00"]
+    } catch (error) {
+        console.error('Error fetching unavailable times:', error);
+        return [];
+    }
+}
+
+// Assume your existing function to update local bookings remains here
+function updateTimeSlotAvailability(selectedDate) {
+    // Your local booking logic here, or leave empty if none
+}
+
+// Main function to update time slot dropdown with GitHub blocked times
 async function updateTimeSlotWithGitHubData(selectedDate) {
+    const timeSlotSelect = document.querySelector('select[name="Preferred Time"]');
+    if (!timeSlotSelect) {
+        console.warn('Preferred Time select element not found');
+        return;
+    }
+
     const options = timeSlotSelect.querySelectorAll('option');
 
-    // First apply local cupping bookings
+    // Reset options to enabled and remove any "(Unavailable)" labels
+    options.forEach(option => {
+        option.disabled = false;
+        option.style.color = '';
+        option.textContent = option.textContent.replace(' (Unavailable)', '');
+    });
+
+    // Apply your local cupping bookings first
     updateTimeSlotAvailability(selectedDate);
 
-    // Then apply GitHub unavailability data
+    // Then disable times based on GitHub blocked times
     const unavailableTimes = await loadUnavailableTimesFromGitHub();
 
-    if (unavailableTimes && Array.isArray(unavailableTimes)) {
+    if (Array.isArray(unavailableTimes)) {
         options.forEach(option => {
-            if (option.value) {
-                const timeValue = option.value;
-                const isUnavailableOnGitHub = unavailableTimes.includes(timeValue);
-
-                if (isUnavailableOnGitHub) {
-                    option.disabled = true;
-                    option.style.color = '#ccc';
-                    if (!option.textContent.includes('(Unavailable)')) {
-                        option.textContent = option.textContent.replace(' (Unavailable)', '') + ' (Unavailable)';
-                    }
+            if (option.value && unavailableTimes.includes(option.value)) {
+                option.disabled = true;
+                option.style.color = '#ccc';
+                if (!option.textContent.includes('(Unavailable)')) {
+                    option.textContent += ' (Unavailable)';
                 }
             }
         });
@@ -723,14 +749,26 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
+// Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Animate page elements
     const animateElements = document.querySelectorAll('.service-category, .feature, .contact-item');
-
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+
+    // Update time slots initially and whenever Preferred Date changes
+    const dateInput = document.querySelector('input[name="Preferred Date"]');
+    if (dateInput) {
+        updateTimeSlotWithGitHubData(dateInput.value);
+
+        dateInput.addEventListener('change', (event) => {
+            updateTimeSlotWithGitHubData(event.target.value);
+        });
+    } else {
+        console.warn('Preferred Date input element not found');
+    }
 });
