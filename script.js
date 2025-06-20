@@ -665,7 +665,7 @@ function toggleAccordion(element) {
 // Function to load blocked times from GitHub
 async function loadBlockedTimesFromGitHub() {
     try {
-        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json");
+        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json");
         if (response.ok) {
             const blockedTimes = await response.json();
             console.log("Loaded blocked times from GitHub:", blockedTimes);
@@ -682,9 +682,13 @@ async function loadBlockedTimesFromGitHub() {
 
 // Function to update time slots with GitHub blocked times data
 async function updateTimeSlotWithGitHubData(selectedDate) {
-    if (!timeSlotSelect) return;
+    const timeSlotSelectElement = document.getElementById('timeSlot');
+    if (!timeSlotSelectElement) {
+        console.warn('Preferred Time select element not found');
+        return;
+    }
 
-    const options = timeSlotSelect.querySelectorAll('option');
+    const options = timeSlotSelectElement.querySelectorAll('option');
 
     // First reset all options
     options.forEach(option => {
@@ -751,11 +755,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Update time slots initially and whenever Preferred Date changes
-    const dateInput = document.querySelector('input[name="Preferred Date"]');
-    if (dateInput) {
-        updateTimeSlotWithGitHubData(dateInput.value);
+    const dateInputElement = document.getElementById('date');
+    if (dateInputElement) {
+        updateTimeSlotWithGitHubData(dateInputElement.value);
 
-        dateInput.addEventListener('change', (event) => {
+        dateInputElement.addEventListener('change', (event) => {
             updateTimeSlotWithGitHubData(event.target.value);
         });
     } else {
