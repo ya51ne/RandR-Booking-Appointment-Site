@@ -703,6 +703,10 @@ async function loadBlockedTimesFromGitHub() {
                         console.log("Cleaned escaped backslashes:", cleanedText);
                     }
                     
+                    // Remove any trailing newlines or whitespace that could break JSON parsing
+                    cleanedText = cleanedText.replace(/\s+$/, '');
+                    console.log("Final cleaned text for parsing:", cleanedText);
+                    
                     const blockedTimes = JSON.parse(cleanedText);
                     
                     if (Array.isArray(blockedTimes)) {
