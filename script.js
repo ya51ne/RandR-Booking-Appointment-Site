@@ -1,4 +1,3 @@
-
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -663,71 +662,62 @@ function toggleAccordion(element) {
     }
 }
 
-// Function to load unavailable times from GitHub
-async function loadUnavailableTimesFromGitHub() {
+// Function to load blocked times from GitHub
+async function loadBlockedTimesFromGitHub() {
     try {
         const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json");
         if (response.ok) {
-            const unavailableTimes = await response.json();
-            return unavailableTimes;
+            const blockedTimes = await response.json();
+            console.log("Loaded blocked times from GitHub:", blockedTimes);
+            return blockedTimes;
         } else {
-            console.warn("Could not load unavailable times from GitHub, using default times");
-            return null;
+            console.warn("Could not load blocked times from GitHub, using default times");
+            return [];
         }
     } catch (error) {
-        console.error("Error loading unavailable times from GitHub:", error);
-        return null;
-    }
-}
-
-// Helper: Fetch blocked times JSON from GitHub
-async function loadUnavailableTimesFromGitHub() {
-    try {
-        const response = await fetch('https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json');
-        if (!response.ok) throw new Error('Failed to load blocked times');
-        const data = await response.json();
-        return data; // Example: ["2025-06-26 09:00", "2025-06-27 14:00"]
-    } catch (error) {
-        console.error('Error fetching unavailable times:', error);
+        console.error("Error loading blocked times from GitHub:", error);
         return [];
     }
 }
 
-// Assume your existing function to update local bookings remains here
-function updateTimeSlotAvailability(selectedDate) {
-    // Your local booking logic here, or leave empty if none
-}
-
-// Main function to update time slot dropdown with GitHub blocked times
+// Function to update time slots with GitHub blocked times data
 async function updateTimeSlotWithGitHubData(selectedDate) {
-    const timeSlotSelect = document.querySelector('select[name="Preferred Time"]');
-    if (!timeSlotSelect) {
-        console.warn('Preferred Time select element not found');
-        return;
-    }
+    if (!timeSlotSelect) return;
 
     const options = timeSlotSelect.querySelectorAll('option');
 
-    // Reset options to enabled and remove any "(Unavailable)" labels
+    // First reset all options
     options.forEach(option => {
-        option.disabled = false;
-        option.style.color = '';
-        option.textContent = option.textContent.replace(' (Unavailable)', '');
+        if (option.value) {
+            option.disabled = false;
+            option.style.color = '';
+            option.textContent = option.textContent.replace(' (Unavailable)', '').replace(' (Past time)', '');
+        }
     });
 
-    // Apply your local cupping bookings first
+    // Apply local cupping bookings
     updateTimeSlotAvailability(selectedDate);
 
-    // Then disable times based on GitHub blocked times
-    const unavailableTimes = await loadUnavailableTimesFromGitHub();
+    // Then apply GitHub blocked times data
+    const blockedTimes = await loadBlockedTimesFromGitHub();
 
-    if (Array.isArray(unavailableTimes)) {
+    if (blockedTimes && Array.isArray(blockedTimes)) {
+        // Convert selected date to format that matches GitHub data
+        const formattedDate = selectedDate; // assuming format is YYYY-MM-DD
+
         options.forEach(option => {
-            if (option.value && unavailableTimes.includes(option.value)) {
-                option.disabled = true;
-                option.style.color = '#ccc';
-                if (!option.textContent.includes('(Unavailable)')) {
-                    option.textContent += ' (Unavailable)';
+            if (option.value) {
+                const timeValue = option.value;
+                // Check if this date-time combination is blocked
+                const dateTimeString = `${formattedDate} ${timeValue}`;
+                const isBlockedOnGitHub = blockedTimes.includes(dateTimeString);
+
+                if (isBlockedOnGitHub) {
+                    option.disabled = true;
+                    option.style.color = '#ccc';
+                    if (!option.textContent.includes('(Unavailable)')) {
+                        option.textContent += ' (Unavailable)';
+                    }
                 }
             }
         });
