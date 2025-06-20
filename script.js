@@ -678,14 +678,29 @@ async function loadBlockedTimesFromGitHub() {
                 console.log("Raw response from GitHub:", responseText);
                 
                 try {
-                    // Clean up the response text and handle escaped JSON
+                    // Clean up the response text and handle different GitHub API response formats
                     let cleanedText = responseText.trim();
                     
+                    // Remove trailing newlines
+                    cleanedText = cleanedText.replace(/\n$/, '');
+                    
+                    // Handle case where entire response is wrapped in quotes
+                    if (cleanedText.startsWith('"') && cleanedText.endsWith('"')) {
+                        cleanedText = cleanedText.slice(1, -1);
+                        console.log("Removed outer quotes:", cleanedText);
+                    }
+                    
                     // Handle escaped JSON strings from GitHub API
-                    if (cleanedText.startsWith('[\\') && cleanedText.includes('\\"')) {
-                        // Replace escaped quotes and backslashes
-                        cleanedText = cleanedText.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-                        console.log("Cleaned escaped JSON:", cleanedText);
+                    if (cleanedText.includes('\\"')) {
+                        // Replace escaped quotes
+                        cleanedText = cleanedText.replace(/\\"/g, '"');
+                        console.log("Cleaned escaped quotes:", cleanedText);
+                    }
+                    
+                    // Handle escaped backslashes
+                    if (cleanedText.includes('\\\\')) {
+                        cleanedText = cleanedText.replace(/\\\\/g, '\\');
+                        console.log("Cleaned escaped backslashes:", cleanedText);
                     }
                     
                     const blockedTimes = JSON.parse(cleanedText);
@@ -701,16 +716,26 @@ async function loadBlockedTimesFromGitHub() {
                     console.warn("Failed to parse GitHub response as JSON:", parseError);
                     console.warn("Response text was:", responseText);
                     
-                    // Try alternative parsing for different escape formats
-                    try {
-                        const alternativeText = responseText.replace(/\\"/g, '"').replace(/\\\\/g, '');
-                        const alternativeResult = JSON.parse(alternativeText);
-                        if (Array.isArray(alternativeResult)) {
-                            console.log("Successfully parsed with alternative method:", alternativeResult);
-                            return alternativeResult;
+                    // Try multiple alternative parsing approaches
+                    const alternatives = [
+                        // Try removing all escape characters
+                        responseText.replace(/\\/g, ''),
+                        // Try double parsing (in case it's double-encoded)
+                        responseText.replace(/\\"/g, '"').replace(/\\\\/g, '\\'),
+                        // Try treating as string and parsing inner content
+                        responseText.replace(/^"/, '').replace(/"$/, '').replace(/\\"/g, '"')
+                    ];
+                    
+                    for (let i = 0; i < alternatives.length; i++) {
+                        try {
+                            const result = JSON.parse(alternatives[i].trim());
+                            if (Array.isArray(result)) {
+                                console.log(`Successfully parsed with alternative method ${i + 1}:`, result);
+                                return result;
+                            }
+                        } catch (altError) {
+                            console.warn(`Alternative parsing method ${i + 1} failed:`, altError);
                         }
-                    } catch (altError) {
-                        console.warn("Alternative parsing also failed:", altError);
                     }
                     
                     return [];
