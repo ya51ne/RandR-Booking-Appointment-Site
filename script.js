@@ -689,7 +689,7 @@ async function loadBlockedTimesFromGitHub() {
     
     // Fallback to local file
     try {
-        const localResponse = await fetch('./available-times.json');
+        const localResponse = await fetch(`./available-times.json?t=${timestamp}`);
         if (localResponse.ok) {
             const blockedTimes = await localResponse.json();
             console.log("Loaded blocked times from local file:", blockedTimes);
