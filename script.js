@@ -678,8 +678,16 @@ async function loadBlockedTimesFromGitHub() {
                 console.log("Raw response from GitHub:", responseText);
                 
                 try {
-                    // Clean up the response text and parse as JSON
-                    const cleanedText = responseText.trim();
+                    // Clean up the response text and handle escaped JSON
+                    let cleanedText = responseText.trim();
+                    
+                    // Handle escaped JSON strings from GitHub API
+                    if (cleanedText.startsWith('[\\') && cleanedText.includes('\\"')) {
+                        // Replace escaped quotes and backslashes
+                        cleanedText = cleanedText.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+                        console.log("Cleaned escaped JSON:", cleanedText);
+                    }
+                    
                     const blockedTimes = JSON.parse(cleanedText);
                     
                     if (Array.isArray(blockedTimes)) {
@@ -692,6 +700,19 @@ async function loadBlockedTimesFromGitHub() {
                 } catch (parseError) {
                     console.warn("Failed to parse GitHub response as JSON:", parseError);
                     console.warn("Response text was:", responseText);
+                    
+                    // Try alternative parsing for different escape formats
+                    try {
+                        const alternativeText = responseText.replace(/\\"/g, '"').replace(/\\\\/g, '');
+                        const alternativeResult = JSON.parse(alternativeText);
+                        if (Array.isArray(alternativeResult)) {
+                            console.log("Successfully parsed with alternative method:", alternativeResult);
+                            return alternativeResult;
+                        }
+                    } catch (altError) {
+                        console.warn("Alternative parsing also failed:", altError);
+                    }
+                    
                     return [];
                 }
             } else {
