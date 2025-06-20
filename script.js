@@ -665,7 +665,9 @@ function toggleAccordion(element) {
 // Function to load blocked times from GitHub
 async function loadBlockedTimesFromGitHub() {
     try {
-        const response = await fetch("https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/f2c6973f16313de49ce7f222069bf39ba4ad7e6b/available-times.json");
+        // Add cache-busting parameter to ensure fresh data
+        const timestamp = new Date().getTime();
+        const response = await fetch(`https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=${timestamp}`);
         if (response.ok) {
             const blockedTimes = await response.json();
             console.log("Loaded blocked times from GitHub:", blockedTimes);
@@ -688,6 +690,8 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
         return;
     }
 
+    console.log('Updating time slots for date:', selectedDate);
+
     const options = timeSlotSelectElement.querySelectorAll('option');
 
     // First reset all options
@@ -704,6 +708,7 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
 
     // Then apply GitHub blocked times data
     const blockedTimes = await loadBlockedTimesFromGitHub();
+    console.log('Processing blocked times:', blockedTimes);
 
     if (blockedTimes && Array.isArray(blockedTimes)) {
         // Convert selected date to format that matches GitHub data
@@ -716,12 +721,15 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
                 const dateTimeString = `${formattedDate} ${timeValue}`;
                 const isBlockedOnGitHub = blockedTimes.includes(dateTimeString);
 
+                console.log(`Checking ${dateTimeString}: blocked = ${isBlockedOnGitHub}`);
+
                 if (isBlockedOnGitHub) {
                     option.disabled = true;
                     option.style.color = '#ccc';
                     if (!option.textContent.includes('(Unavailable)')) {
                         option.textContent += ' (Unavailable)';
                     }
+                    console.log(`Disabled time slot: ${timeValue} for ${selectedDate}`);
                 }
             }
         });
@@ -754,15 +762,33 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Update time slots initially and whenever Preferred Date changes
-    const dateInputElement = document.getElementById('date');
-    if (dateInputElement) {
-        updateTimeSlotWithGitHubData(dateInputElement.value);
-
-        dateInputElement.addEventListener('change', (event) => {
-            updateTimeSlotWithGitHubData(event.target.value);
-        });
-    } else {
-        console.warn('Preferred Date input element not found');
-    }
+    // Initialize GitHub blocked times functionality
+    initializeBlockedTimesSystem();
 });
+
+// Function to initialize the blocked times system
+function initializeBlockedTimesSystem() {
+    const dateInputElement = document.getElementById('date');
+    const timeSlotElement = document.getElementById('timeSlot');
+    
+    if (!dateInputElement) {
+        console.warn('Preferred Date input element not found');
+        return;
+    }
+    
+    if (!timeSlotElement) {
+        console.warn('Preferred Time select element not found');
+        return;
+    }
+
+    console.log('Blocked times system initialized successfully');
+
+    // Load blocked times immediately when date changes
+    dateInputElement.addEventListener('change', async (event) => {
+        const selectedDate = event.target.value;
+        if (selectedDate) {
+            console.log('Date changed to:', selectedDate);
+            await updateTimeSlotWithGitHubData(selectedDate);
+        }
+    });
+}
