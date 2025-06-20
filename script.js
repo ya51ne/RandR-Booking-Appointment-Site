@@ -674,8 +674,19 @@ async function loadBlockedTimesFromGitHub() {
             
             const response = await fetch(url);
             if (response.ok) {
-                const blockedTimes = await response.json();
+                let blockedTimes = await response.json();
                 console.log("Loaded blocked times from GitHub:", blockedTimes);
+                
+                // If the response is a string (which seems to be the case), parse it
+                if (typeof blockedTimes === 'string') {
+                    try {
+                        blockedTimes = JSON.parse(blockedTimes.trim());
+                    } catch (parseError) {
+                        console.warn("Failed to parse GitHub response as JSON:", parseError);
+                        return [];
+                    }
+                }
+                
                 return blockedTimes;
             } else {
                 console.warn(`Branch '${branch}' not found or file missing (${response.status})`);
