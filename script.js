@@ -28,13 +28,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background opacity on scroll
+// Navbar background opacity on scroll - cached navbar element
+const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'linear-gradient(135deg, rgba(245, 249, 245, 0.98) 0%, rgba(232, 244, 241, 0.98) 100%)';
-    } else {
-        navbar.style.background = 'linear-gradient(135deg, rgba(245, 249, 245, 0.95) 0%, rgba(232, 244, 241, 0.95) 100%)';
+    if (navbar) {
+        if (window.scrollY > 100) {
+            navbar.style.background = 'linear-gradient(135deg, rgba(245, 249, 245, 0.98) 0%, rgba(232, 244, 241, 0.98) 100%)';
+        } else {
+            navbar.style.background = 'linear-gradient(135deg, rgba(245, 249, 245, 0.95) 0%, rgba(232, 244, 241, 0.95) 100%)';
+        }
     }
 });
 
@@ -122,10 +124,12 @@ function updateTimeSlotAvailability(selectedDate) {
 // Initialize booked slots on page load
 loadBookedCuppingSlots();
 
-// Set minimum date for booking to today
+// Cache DOM elements for better performance
 const dateInput = document.getElementById('date');
 const timeSlotGroup = document.getElementById('timeSlotGroup');
 const timeSlotSelect = document.getElementById('timeSlot');
+const selectedCountElement = document.getElementById('selectedCount');
+const estimatedTotalElement = document.getElementById('estimatedTotal');
 
 if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
@@ -484,28 +488,35 @@ function createMessage(type, text) {
     return messageDiv;
 }
 
-// Helper function to show field error messages
-function showFieldError(elementId, message) {
-    const errorElement = document.getElementById(elementId);
-    if (errorElement) {
-        errorElement.textContent = message;
-        errorElement.classList.add('show');
+// Consolidated error message handling
+const ErrorHandler = {
+    show: function(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
+    },
+    clear: function() {
+        const errorMessages = document.querySelectorAll('.error-message');
+        errorMessages.forEach(error => {
+            error.textContent = '';
+            error.classList.remove('show');
+        });
     }
+};
+
+// Legacy function wrappers for backward compatibility
+function showFieldError(elementId, message) {
+    ErrorHandler.show(elementId, message);
 }
 
-// Helper function to clear all error messages
 function clearErrorMessages() {
-    const errorMessages = document.querySelectorAll('.error-message');
-    errorMessages.forEach(error => {
-        error.textContent = '';
-        error.classList.remove('show');
-    });
+    ErrorHandler.clear();
 }
 
-// Multiple services selection handling
+// Multiple services selection handling - use cached elements
 const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
-const selectedCountElement = document.getElementById('selectedCount');
-const estimatedTotalElement = document.getElementById('estimatedTotal');
 
 if (serviceCheckboxes.length > 0) {
     serviceCheckboxes.forEach(checkbox => {
@@ -662,17 +673,29 @@ function toggleAccordion(element) {
     }
 }
 
-// Function to load blocked times from GitHub
+// Function to load blocked times from GitHub - optimized with caching
+let cachedBlockedTimes = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 60000; // 1 minute cache
+
 async function loadBlockedTimesFromGitHub() {
-    const branches = ['main', 'master']; // Try both common branch names
-    const timestamp = new Date().getTime();
+    // Return cached data if still valid
+    if (cachedBlockedTimes && (Date.now() - lastFetchTime) < CACHE_DURATION) {
+        return cachedBlockedTimes;
+    }
+
+    const branches = ['main', 'master'];
+    const timestamp = Date.now();
     
     for (const branch of branches) {
         try {
             const url = `https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/${branch}/available-times.json?t=${timestamp}`;
-            console.log(`Trying to fetch from: ${url}`);
             
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                method: 'GET',
+                cache: 'no-cache'
+            });
+            
             if (response.ok) {
                 const responseText = await response.text();
                 console.log("Raw response from GitHub:", responseText);
@@ -718,6 +741,9 @@ async function loadBlockedTimesFromGitHub() {
                     
                     if (Array.isArray(blockedTimes)) {
                         console.log("Successfully loaded blocked times from GitHub:", blockedTimes);
+                        // Cache successful result
+                        cachedBlockedTimes = blockedTimes;
+                        lastFetchTime = Date.now();
                         return blockedTimes;
                     } else {
                         console.warn("GitHub response is not an array:", blockedTimes);
