@@ -664,22 +664,42 @@ function toggleAccordion(element) {
 
 // Function to load blocked times from GitHub
 async function loadBlockedTimesFromGitHub() {
-    try {
-        // Add cache-busting parameter to ensure fresh data
-        const timestamp = new Date().getTime();
-        const response = await fetch(`https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=${timestamp}`);
-        if (response.ok) {
-            const blockedTimes = await response.json();
-            console.log("Loaded blocked times from GitHub:", blockedTimes);
-            return blockedTimes;
-        } else {
-            console.warn("Could not load blocked times from GitHub, using default times");
-            return [];
+    const branches = ['main', 'master']; // Try both common branch names
+    const timestamp = new Date().getTime();
+    
+    for (const branch of branches) {
+        try {
+            const url = `https://raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/${branch}/available-times.json?t=${timestamp}`;
+            console.log(`Trying to fetch from: ${url}`);
+            
+            const response = await fetch(url);
+            if (response.ok) {
+                const blockedTimes = await response.json();
+                console.log("Loaded blocked times from GitHub:", blockedTimes);
+                return blockedTimes;
+            } else {
+                console.warn(`Branch '${branch}' not found or file missing (${response.status})`);
+            }
+        } catch (error) {
+            console.warn(`Error trying branch '${branch}':`, error.message);
         }
-    } catch (error) {
-        console.error("Error loading blocked times from GitHub:", error);
-        return [];
     }
+    
+    console.error("Could not load blocked times from any branch, trying local fallback");
+    
+    // Fallback to local file
+    try {
+        const localResponse = await fetch('./available-times.json');
+        if (localResponse.ok) {
+            const blockedTimes = await localResponse.json();
+            console.log("Loaded blocked times from local file:", blockedTimes);
+            return blockedTimes;
+        }
+    } catch (localError) {
+        console.warn("Local fallback also failed:", localError.message);
+    }
+    
+    return [];
 }
 
 // Function to update time slots with GitHub blocked times data
