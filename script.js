@@ -674,20 +674,26 @@ async function loadBlockedTimesFromGitHub() {
             
             const response = await fetch(url);
             if (response.ok) {
-                let blockedTimes = await response.json();
-                console.log("Loaded blocked times from GitHub:", blockedTimes);
+                const responseText = await response.text();
+                console.log("Raw response from GitHub:", responseText);
                 
-                // If the response is a string (which seems to be the case), parse it
-                if (typeof blockedTimes === 'string') {
-                    try {
-                        blockedTimes = JSON.parse(blockedTimes.trim());
-                    } catch (parseError) {
-                        console.warn("Failed to parse GitHub response as JSON:", parseError);
+                try {
+                    // Clean up the response text and parse as JSON
+                    const cleanedText = responseText.trim();
+                    const blockedTimes = JSON.parse(cleanedText);
+                    
+                    if (Array.isArray(blockedTimes)) {
+                        console.log("Successfully loaded blocked times from GitHub:", blockedTimes);
+                        return blockedTimes;
+                    } else {
+                        console.warn("GitHub response is not an array:", blockedTimes);
                         return [];
                     }
+                } catch (parseError) {
+                    console.warn("Failed to parse GitHub response as JSON:", parseError);
+                    console.warn("Response text was:", responseText);
+                    return [];
                 }
-                
-                return blockedTimes;
             } else {
                 console.warn(`Branch '${branch}' not found or file missing (${response.status})`);
             }
@@ -696,7 +702,7 @@ async function loadBlockedTimesFromGitHub() {
         }
     }
     
-    console.error("Could not load blocked times from any branch, trying local fallback");
+    console.log("Could not load blocked times from GitHub, trying local fallback");
     
     // Fallback to local file
     try {
@@ -704,7 +710,7 @@ async function loadBlockedTimesFromGitHub() {
         if (localResponse.ok) {
             const blockedTimes = await localResponse.json();
             console.log("Loaded blocked times from local file:", blockedTimes);
-            return blockedTimes;
+            return Array.isArray(blockedTimes) ? blockedTimes : [];
         }
     } catch (localError) {
         console.warn("Local fallback also failed:", localError.message);
@@ -725,31 +731,49 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
 
     const options = timeSlotSelectElement.querySelectorAll('option');
 
-    // First reset all options
+    // First reset all options to clean state
     options.forEach(option => {
         if (option.value) {
             option.disabled = false;
             option.style.color = '';
-            option.textContent = option.textContent.replace(' (Unavailable)', '').replace(' (Past time)', '');
+            // Clean up text by removing all status indicators
+            const originalText = option.textContent.replace(/ \(Unavailable\)/g, '').replace(/ \(Past time\)/g, '');
+            option.textContent = originalText;
         }
     });
+
+    // Apply time restrictions for today (past times)
+    const selectedDateObj = new Date(selectedDate);
+    const today = new Date();
+    const isToday = selectedDateObj.toDateString() === today.toDateString();
+
+    if (isToday) {
+        const currentHour = today.getHours();
+        options.forEach(option => {
+            if (option.value) {
+                const slotHour = parseInt(option.value.split(':')[0]);
+                if (slotHour <= currentHour) {
+                    option.disabled = true;
+                    option.style.color = '#ccc';
+                    option.textContent += ' (Past time)';
+                }
+            }
+        });
+    }
 
     // Apply local cupping bookings
     updateTimeSlotAvailability(selectedDate);
 
-    // Then apply GitHub blocked times data
+    // Load and apply GitHub blocked times data
     const blockedTimes = await loadBlockedTimesFromGitHub();
     console.log('Processing blocked times:', blockedTimes);
 
-    if (blockedTimes && Array.isArray(blockedTimes)) {
-        // Convert selected date to format that matches GitHub data
-        const formattedDate = selectedDate; // assuming format is YYYY-MM-DD
-
+    if (blockedTimes && Array.isArray(blockedTimes) && blockedTimes.length > 0) {
         options.forEach(option => {
-            if (option.value) {
+            if (option.value && !option.disabled) {
                 const timeValue = option.value;
                 // Check if this date-time combination is blocked
-                const dateTimeString = `${formattedDate} ${timeValue}`;
+                const dateTimeString = `${selectedDate} ${timeValue}`;
                 const isBlockedOnGitHub = blockedTimes.includes(dateTimeString);
 
                 console.log(`Checking ${dateTimeString}: blocked = ${isBlockedOnGitHub}`);
@@ -757,10 +781,11 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
                 if (isBlockedOnGitHub) {
                     option.disabled = true;
                     option.style.color = '#ccc';
-                    if (!option.textContent.includes('(Unavailable)')) {
+                    // Only add (Unavailable) if it's not already there and it's not marked as past time
+                    if (!option.textContent.includes('(Unavailable)') && !option.textContent.includes('(Past time)')) {
                         option.textContent += ' (Unavailable)';
                     }
-                    console.log(`Disabled time slot: ${timeValue} for ${selectedDate}`);
+                    console.log(`Disabled time slot: ${timeValue} for ${selectedDate} (blocked on GitHub)`);
                 }
             }
         });
