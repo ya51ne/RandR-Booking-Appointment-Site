@@ -705,6 +705,13 @@ async function loadBlockedTimesFromGitHub() {
                     
                     // Remove any trailing newlines or whitespace that could break JSON parsing
                     cleanedText = cleanedText.replace(/\s+$/, '');
+                    
+                    // Handle the specific case where there's a trailing \n character
+                    if (cleanedText.endsWith('\\n')) {
+                        cleanedText = cleanedText.slice(0, -2);
+                        console.log("Removed trailing \\n:", cleanedText);
+                    }
+                    
                     console.log("Final cleaned text for parsing:", cleanedText);
                     
                     const blockedTimes = JSON.parse(cleanedText);
