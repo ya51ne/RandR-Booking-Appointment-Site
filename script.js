@@ -657,7 +657,7 @@ function toggleAccordion(element) {
         accordionItem.classList.add('active');
         // Calculate max-height based on screen size for better mobile support
         const isMobile = window.innerWidth <= 768;
-        const extraSpace = isMobile ? 50 : 30;
+        const extraSpace = isMobile ? 80 : 50;
         content.style.maxHeight = content.scrollHeight + extraSpace + 'px';
     }
 }

@@ -1141,16 +1141,17 @@ h4 {
 }
 
 .accordion-item.active .accordion-content {
-    padding: 2rem 1.5rem;
-    max-height: 500px;
+    padding: 2.5rem 1.5rem;
+    max-height: 600px;
     display: block;
     text-align: left;
 }
 
 .accordion-content p {
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.7;
     color: #555;
+    padding-bottom: 0.5rem;
 }
 
 /* Services Page Styles */
@@ -1339,18 +1340,20 @@ h4 {
     }
 
 ```text
-    .accordion-header{
-        padding: 1rem;
+    .accordion-header {
+        padding: 1.2rem 1rem;
     }
 
     .accordion-item.active .accordion-content {
-        padding: 1.5rem 1rem;
+        padding: 2rem 1rem;
         text-align: left;
         display: block;
+        max-height: 700px;
     }
     
     .accordion-content p {
         font-size: 0.95rem;
-        line-height: 1.5;
+        line-height: 1.6;
+        padding-bottom: 0.75rem;
     }
 }
