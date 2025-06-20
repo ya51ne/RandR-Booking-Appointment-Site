@@ -1,1 +1,1 @@
-Buffer.from(JSON.stringify($json.blockedTimesArray)).toString('base64')
+Buffer.from($json.content).toString('base64')
