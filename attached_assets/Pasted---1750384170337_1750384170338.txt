@@ -1,0 +1,400 @@
+ 
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      
+ [LaunchDarkly] LaunchDarkly client initialized
+cdn.segment.com/v1/projects/dMePKGC4BqfBivpe0Hvl8IoPpzSHgjdX/settings:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ Failed to fetch
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ [analytics.js] Failed to load Analytics.js 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+api.segment.io/v1/m:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ Error sending segment performance metrics 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-b01fbef7f7f6b…1b0a06ed8b0a85.js:1 Uncaught (in promise) 
+ Injectable Content:  Object
+RandR-Booking-Appt-Site#script.js:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=97bedaed-4fc3-4e47-b157-239f29552218:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=a380f6d0-4b2e-4a14-b621-b24b1a083e3c:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=1c031c03-1941-4c38-ab38-e0c99c66f419:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=794c9e51-dc1e-4e75-a8ca-686167ad6c92:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Unrecognized feature: 'ambient-light-sensor'.
+Unrecognized feature: 'ambient-light-sensor'.
+Unrecognized feature: 'ambient-light-sensor'.
+Unrecognized feature: 'ambient-light-sensor'.
+Unrecognized feature: 'ambient-light-sensor'.
+Unrecognized feature: 'battery'.
+Unrecognized feature: 'battery'.
+Unrecognized feature: 'battery'.
+Unrecognized feature: 'battery'.
+Unrecognized feature: 'battery'.
+Unrecognized feature: 'execution-while-not-rendered'.
+Unrecognized feature: 'execution-while-not-rendered'.
+Unrecognized feature: 'execution-while-not-rendered'.
+Unrecognized feature: 'execution-while-not-rendered'.
+Unrecognized feature: 'execution-while-not-rendered'.
+Unrecognized feature: 'execution-while-out-of-viewport'.
+Unrecognized feature: 'execution-while-out-of-viewport'.
+Unrecognized feature: 'execution-while-out-of-viewport'.
+Unrecognized feature: 'execution-while-out-of-viewport'.
+Unrecognized feature: 'execution-while-out-of-viewport'.
+Unrecognized feature: 'layout-animations'.
+Unrecognized feature: 'layout-animations'.
+Unrecognized feature: 'layout-animations'.
+Unrecognized feature: 'layout-animations'.
+Unrecognized feature: 'layout-animations'.
+Unrecognized feature: 'legacy-image-formats'.
+Unrecognized feature: 'legacy-image-formats'.
+Unrecognized feature: 'legacy-image-formats'.
+Unrecognized feature: 'legacy-image-formats'.
+Unrecognized feature: 'legacy-image-formats'.
+Unrecognized feature: 'navigation-override'.
+Unrecognized feature: 'navigation-override'.
+Unrecognized feature: 'navigation-override'.
+Unrecognized feature: 'navigation-override'.
+Unrecognized feature: 'navigation-override'.
+Unrecognized feature: 'oversized-images'.
+Unrecognized feature: 'oversized-images'.
+Unrecognized feature: 'oversized-images'.
+Unrecognized feature: 'oversized-images'.
+Unrecognized feature: 'oversized-images'.
+Unrecognized feature: 'publickey-credentials'.
+Unrecognized feature: 'publickey-credentials'.
+Unrecognized feature: 'publickey-credentials'.
+Unrecognized feature: 'publickey-credentials'.
+Unrecognized feature: 'publickey-credentials'.
+Unrecognized feature: 'speaker-selection'.
+Unrecognized feature: 'speaker-selection'.
+Unrecognized feature: 'speaker-selection'.
+Unrecognized feature: 'speaker-selection'.
+Unrecognized feature: 'speaker-selection'.
+Unrecognized feature: 'unoptimized-images'.
+Unrecognized feature: 'unoptimized-images'.
+Unrecognized feature: 'unoptimized-images'.
+Unrecognized feature: 'unoptimized-images'.
+Unrecognized feature: 'unoptimized-images'.
+Unrecognized feature: 'unsized-media'.
+Unrecognized feature: 'unsized-media'.
+Unrecognized feature: 'unsized-media'.
+Unrecognized feature: 'unsized-media'.
+Unrecognized feature: 'unsized-media'.
+ Unrecognized feature: 'pointer-lock'.
+_ @ framework-509f9d1b109aef6d.js:1
+Allow attribute will take precedence over 'allowfullscreen'.
+Allow attribute will take precedence over 'allowfullscreen'.
+Allow attribute will take precedence over 'allowfullscreen'.
+Allow attribute will take precedence over 'allowfullscreen'.
+Allow attribute will take precedence over 'allowfullscreen'.
+Allow attribute will take precedence over 'allowpaymentrequest'.
+Allow attribute will take precedence over 'allowpaymentrequest'.
+Allow attribute will take precedence over 'allowpaymentrequest'.
+Allow attribute will take precedence over 'allowpaymentrequest'.
+Allow attribute will take precedence over 'allowpaymentrequest'.
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-b01fbef7f7f6b…1b0a06ed8b0a85.js:1 Uncaught (in promise) 
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-b01fbef7f7f6b…1b0a06ed8b0a85.js:1 Uncaught (in promise) 
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=e80f6ea3-039a-422c-8dde-f4b34800115c:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=b82865ad-09cb-4583-b209-6d8f7afa1e4e:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=d9823c7c-584b-457c-90b7-a7f600cd4b57:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=b53b2145-ef6a-4b92-ae39-846a92e5c862:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+ 
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=586d6ccf-9263-4546-a248-b50e0aed60e5:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=e9f5b799-0c35-4a13-a05a-11325b7b0699:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ [Report Only] Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+ [Report Only] Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+ [Report Only] Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+ [Report Only] Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+ Refused to execute inline script because it violates the following Content Security Policy directive: "script-src https://m.stripe.network 'sha256-5DA+a07wxWmEka9IdoWjSPVHb17Cp5284/lJzfbl8KA=' 'sha256-/5Guo2nzv5n/w6ukZpOBZOtTJBJPSkJ6mhHpnBgm3Ls='". Either the 'unsafe-inline' keyword, a hash ('sha256-goH1EjcXQbwrYR01ZDpVak8DDr9RKz5ArTY1IM/J1IQ='), or a nonce ('nonce-...') is required to enable inline execution.
+
+(anonymous) @ unknown
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=d028ebd7-8dda-48e2-94b3-1498aea7845b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=201a16b5-696f-4628-9393-3b99542ea874:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-b01fbef7f7f6b…1b0a06ed8b0a85.js:1 Uncaught (in promise) 
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=50fa4fdf-d705-4c36-a996-8e8ffd107533:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=00541b50-2b74-4a2f-89b7-90a2fe6ecef8:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=ee9735bb-1ecf-4467-a052-555f458ec3cd:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=cab41d16-9be4-4291-a0ed-b4761efe90c4:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=7448a5da-7285-46b6-9c88-5148d88d977a:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=030a04a4-7cd7-4538-bde2-3cf34e0b6c01:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=e9cf3b32-b795-471a-a90d-528847b7e4dd:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=b98f5971-8532-4e03-b01a-5518482cfe31:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-b01fbef7f7f6b…1b0a06ed8b0a85.js:1 Uncaught (in promise) 
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=6ea9a102-38d1-499a-95d8-f3ae38d25f90:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=8923e86c-7387-4e30-9cd1-b663901c34a5:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=bbc4a401-cd00-4b15-bdbe-28cd5f012481:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=56f648ba-6c71-4c92-a47c-e425b5ea56db:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-b01fbef7f7f6b…1b0a06ed8b0a85.js:1 Uncaught (in promise) 
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+r.stripe.com/b:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+shared-b01fbef7f7f6b…1b0a06ed8b0a85.js:1 Uncaught (in promise) 
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=2c0aa801-eacd-4bfd-bf70-1e692a4fa00d:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=69e1c485-2463-4fc1-8ca2-5ba2157b0b64:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Afetch%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=560ba787-235b-4109-a239-bc78d8b8d2a7:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+logs.browser-intake-us5-datadoghq.com/api/v2/logs?ddsource=browser&ddtags=sdk_version%3A4.46.0%2Capi%3Axhr%2Cenv%3Aproduction%2Cservice%3Awebsite%2Cversion%3Aab05cc28&dd-api-key=pub31a5047a3a4692afb84a423db984dc57&dd-evp-origin-version=4.46.0&dd-evp-origin=browser&dd-request-id=0b44e681-1969-4ba5-9e6f-fc619706b299:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+gravatar.com/avatar/72f83e12e404170737df34886539f703?d=404:1  Failed to load resource: the server responded with a status of 404 ()
+ Blocked times system initialized successfully
+ Blocked times system initialized successfully
+ Blocked times system initialized successfully
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969638:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969638:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969638:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969638:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969635:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969635:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969635:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750383969635:1  Failed to load resource: the server responded with a status of 404 ()
+ Blocked times system initialized successfully
+ Updating time slots for date: 2025-06-20
+ Date changed to: 2025-06-20
+ Updating time slots for date: 2025-06-20
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033908:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033908:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033908:1  Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033908:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 ()
+Console.js:61 Could not load blocked times from GitHub, using default times
+Mt.forEach.n.<computed> @ Console.js:61
+Console.js:61 Processing blocked times: Array(0)
+Console.js:61 Checking 2025-06-20 09:00: blocked = false
+Console.js:61 Checking 2025-06-20 10:00: blocked = false
+Console.js:61 Checking 2025-06-20 11:00: blocked = false
+Console.js:61 Checking 2025-06-20 12:00: blocked = false
+Console.js:61 Checking 2025-06-20 13:00: blocked = false
+Console.js:61 Checking 2025-06-20 14:00: blocked = false
+Console.js:61 Checking 2025-06-20 15:00: blocked = false
+Console.js:61 Checking 2025-06-20 16:00: blocked = false
+Console.js:61 Checking 2025-06-20 17:00: blocked = false
+Console.js:61 Checking 2025-06-20 18:00: blocked = false
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033909:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033909:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033909:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 ()
+raw.githubusercontent.com/ya51ne/RandR-Booking-Appointment-Site/main/available-times.json?t=1750384033909:1 
+            
+            
+           Failed to load resource: the server responded with a status of 404 ()
+Console.js:61 Could not load blocked times from GitHub, using default times
+Mt.forEach.n.<computed> @ Console.js:61
+Console.js:61 Processing blocked times: Array(0)
+Console.js:61 Checking 2025-06-20 09:00: blocked = false
+Console.js:61 Checking 2025-06-20 10:00: blocked = false
+Console.js:61 Checking 2025-06-20 11:00: blocked = false
+Console.js:61 Checking 2025-06-20 12:00: blocked = false
+Console.js:61 Checking 2025-06-20 13:00: blocked = false
+Console.js:61 Checking 2025-06-20 14:00: blocked = false
+Console.js:61 Checking 2025-06-20 15:00: blocked = false
+Console.js:61 Checking 2025-06-20 16:00: blocked = false
+Console.js:61 Checking 2025-06-20 17:00: blocked = false
+Console.js:61 Checking 2025-06-20 18:00: blocked = false
+_app-d42ca8c94ecdb906.js:38 
+            
+            
+           POST https://events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+promise @ _app-d42ca8c94ecdb906.js:6
+(anonymous) @ _app-d42ca8c94ecdb906.js:6
+r.httpRequest @ _app-d42ca8c94ecdb906.js:6
+t @ _app-d42ca8c94ecdb906.js:6
+a.sendChunk @ _app-d42ca8c94ecdb906.js:6
+a.sendEvents @ _app-d42ca8c94ecdb906.js:6
+m @ _app-d42ca8c94ecdb906.js:6
+b @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
+_app-d42ca8c94ecdb906.js:38 
+            
+            
+           POST https://events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+promise @ _app-d42ca8c94ecdb906.js:6
+(anonymous) @ _app-d42ca8c94ecdb906.js:6
+r.httpRequest @ _app-d42ca8c94ecdb906.js:6
+t @ _app-d42ca8c94ecdb906.js:6
+(anonymous) @ _app-d42ca8c94ecdb906.js:6
+Promise.catch
+t @ _app-d42ca8c94ecdb906.js:6
+a.sendChunk @ _app-d42ca8c94ecdb906.js:6
+a.sendEvents @ _app-d42ca8c94ecdb906.js:6
+m @ _app-d42ca8c94ecdb906.js:6
+b @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
+_app-d42ca8c94ecdb906.js:38 
+            
+            
+           POST https://events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+promise @ _app-d42ca8c94ecdb906.js:6
+(anonymous) @ _app-d42ca8c94ecdb906.js:6
+r.httpRequest @ _app-d42ca8c94ecdb906.js:6
+t @ _app-d42ca8c94ecdb906.js:6
+a.sendChunk @ _app-d42ca8c94ecdb906.js:6
+a.sendEvents @ _app-d42ca8c94ecdb906.js:6
+a.flush @ _app-d42ca8c94ecdb906.js:6
+e @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
+setTimeout
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+e @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
+setTimeout
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+e @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
+_app-d42ca8c94ecdb906.js:38 
+            
+            
+           POST https://events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+promise @ _app-d42ca8c94ecdb906.js:6
+(anonymous) @ _app-d42ca8c94ecdb906.js:6
+r.httpRequest @ _app-d42ca8c94ecdb906.js:6
+t @ _app-d42ca8c94ecdb906.js:6
+(anonymous) @ _app-d42ca8c94ecdb906.js:6
+Promise.catch
+t @ _app-d42ca8c94ecdb906.js:6
+a.sendChunk @ _app-d42ca8c94ecdb906.js:6
+a.sendEvents @ _app-d42ca8c94ecdb906.js:6
+a.flush @ _app-d42ca8c94ecdb906.js:6
+e @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
+setTimeout
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+e @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
+setTimeout
+(anonymous) @ _app-d42ca8c94ecdb906.js:38
+e @ _app-d42ca8c94ecdb906.js:6
+n @ _app-d42ca8c94ecdb906.js:38
