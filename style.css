@@ -863,6 +863,7 @@ h4 {
         margin: 0 auto;
         width: 100%;
         max-width: 100%;
+        box-sizing: border-box;
     }
 
     .booking-info {
@@ -870,11 +871,39 @@ h4 {
         margin: 0 auto;
         width: 100%;
         max-width: 100%;
+        box-sizing: border-box;
     }
     
     .booking-form-container {
         padding: 0 10px;
         gap: 1.5rem;
+    }
+    
+    .booking-info h3 {
+        color: white;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .booking-info ul {
+        margin-bottom: 1.5rem;
+    }
+    
+    .booking-info li {
+        margin-bottom: 0.75rem;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .contact-info-box {
+        margin-top: 1.5rem;
+        padding: 1.25rem;
+    }
+    
+    .contact-info-box p {
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        line-height: 1.4;
     }
 }
 
