@@ -181,25 +181,32 @@ h4 {
 
 .hero-buttons {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 800px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
 .btn-primary, .btn-secondary {
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     border: none;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .btn-primary {
@@ -769,22 +776,14 @@ h4 {
     }
 
     .hero-buttons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
         gap: 0.75rem;
         padding: 0 1rem;
         max-width: 400px;
-        margin: 0 auto;
     }
     
     .btn-primary, .btn-secondary {
         padding: 0.8rem 1rem;
         font-size: 0.9rem;
-        min-width: 0;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         border-radius: 25px;
     }
 
