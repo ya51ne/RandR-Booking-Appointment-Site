@@ -40,70 +40,189 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Time slot availability tracking for cupping treatments
-let bookedCuppingSlots = {};
+// Time slot availability tracking for all treatments
+let bookedTimeSlots = {};
 
-// Function to load booked cupping slots from localStorage or server
-function loadBookedCuppingSlots() {
-    const stored = localStorage.getItem('bookedCuppingSlots');
+// Function to load booked time slots from localStorage or server
+function loadBookedTimeSlots() {
+    const stored = localStorage.getItem('bookedTimeSlots');
     if (stored) {
-        bookedCuppingSlots = JSON.parse(stored);
+        bookedTimeSlots = JSON.parse(stored);
+    }
+    
+    // Migrate old cupping data if it exists
+    const oldCuppingData = localStorage.getItem('bookedCuppingSlots');
+    if (oldCuppingData && Object.keys(bookedTimeSlots).length === 0) {
+        bookedTimeSlots = JSON.parse(oldCuppingData);
+        localStorage.removeItem('bookedCuppingSlots'); // Clean up old data
+        saveBookedTimeSlots();
     }
 }
 
-// Function to save booked cupping slots
-function saveBookedCuppingSlots() {
-    localStorage.setItem('bookedCuppingSlots', JSON.stringify(bookedCuppingSlots));
+// Function to save booked time slots
+function saveBookedTimeSlots() {
+    localStorage.setItem('bookedTimeSlots', JSON.stringify(bookedTimeSlots));
 }
 
-// Function to check if a service is a cupping treatment
+// Service duration mapping in minutes
+const serviceDurations = {
+    'Indian Head Massage': 30,
+    'Swedish Massage (30 mins)': 30,
+    'Swedish Massage (60 mins)': 60,
+    'Lymphatic Drainage (30 mins)': 30,
+    'Lymphatic Drainage (60 mins)': 60,
+    'Lymphatic Drainage with Indian Head Massage (30 mins)': 30,
+    'Dry Cupping': 60,
+    'Wet Cupping (Hijama)': 60,
+    // Multivitamin shots - individual duration (will be calculated based on quantity)
+    'B12 (Methylcobalamin)': 15,
+    'Vitamin B Complex': 15,
+    'Vitamin C': 15,
+    'Vitamin D': 15,
+    'B7 (Biotin - 10mg)': 15
+};
+
+// Function to calculate total appointment duration based on selected services
+function calculateAppointmentDuration(selectedServices) {
+    let totalDuration = 0;
+    let vitaminShotCount = 0;
+    
+    selectedServices.forEach(service => {
+        // Extract service name without pricing
+        const serviceName = service.split(' - ')[0];
+        
+        // Check if it's a vitamin shot
+        if (serviceName.includes('B12') || serviceName.includes('Vitamin') || serviceName.includes('B7')) {
+            vitaminShotCount++;
+        } else if (serviceDurations[serviceName]) {
+            totalDuration += serviceDurations[serviceName];
+        }
+    });
+    
+    // Calculate vitamin shot time: 30 mins for 1-2 shots, 60 mins for 3+ shots
+    if (vitaminShotCount > 0) {
+        if (vitaminShotCount <= 2) {
+            totalDuration += 30;
+        } else {
+            totalDuration += 60;
+        }
+    }
+    
+    return totalDuration;
+}
+
+// Function to check if a service requires time blocking
+function requiresTimeBlocking(service) {
+    const serviceName = service.split(' - ')[0];
+    return serviceDurations[serviceName] !== undefined || 
+           serviceName.includes('B12') || 
+           serviceName.includes('Vitamin') || 
+           serviceName.includes('B7');
+}
+
+// Function to check if selected services require time blocking
+function hasTimeBlockingServices(selectedServices) {
+    return selectedServices.some(service => requiresTimeBlocking(service));
+}
+
+// Function to generate time slots that need to be blocked based on appointment duration
+function generateBlockedTimeSlots(date, startTime, durationMinutes) {
+    const blockedSlots = [];
+    const [startHour, startMinute] = startTime.split(':').map(Number);
+    
+    // Convert start time to minutes from midnight
+    let currentMinutes = startHour * 60 + startMinute;
+    const endMinutes = currentMinutes + durationMinutes;
+    
+    // Generate all 30-minute slots that fall within the appointment duration
+    while (currentMinutes < endMinutes) {
+        const hour = Math.floor(currentMinutes / 60);
+        const minute = currentMinutes % 60;
+        const timeSlot = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        
+        // Only include slots within business hours (9:00 - 18:00)
+        if (hour >= 9 && hour < 18) {
+            blockedSlots.push(`${date} ${timeSlot}`);
+        }
+        
+        currentMinutes += 30; // Move to next 30-minute slot
+    }
+    
+    return blockedSlots;
+}
+
+// Function to check if a service is a cupping treatment (legacy function for backward compatibility)
 function isCuppingService(service) {
     return service.toLowerCase().includes('cupping') || service.toLowerCase().includes('hijama');
 }
 
-// Function to check if selected services include cupping
+// Function to check if selected services include cupping (legacy function for backward compatibility)
 function hasCuppingServices(selectedServices) {
     return selectedServices.some(service => isCuppingService(service));
 }
 
-// Function to mark time slot as booked for cupping
+// Function to mark time slots as booked for any treatment
+function markTimeSlotsAsBooked(date, timeSlot, selectedServices) {
+    const appointmentDuration = calculateAppointmentDuration(selectedServices);
+    const blockedSlots = generateBlockedTimeSlots(date, timeSlot, appointmentDuration);
+    
+    blockedSlots.forEach(slot => {
+        const [slotDate, slotTime] = slot.split(' ');
+        if (!bookedTimeSlots[slotDate]) {
+            bookedTimeSlots[slotDate] = [];
+        }
+        if (!bookedTimeSlots[slotDate].includes(slotTime)) {
+            bookedTimeSlots[slotDate].push(slotTime);
+        }
+    });
+    
+    saveBookedTimeSlots();
+    console.log(`Blocked ${blockedSlots.length} time slots for appointment duration: ${appointmentDuration} minutes`);
+}
+
+// Function to check if a time slot is booked
+function isTimeSlotBooked(date, timeSlot) {
+    return bookedTimeSlots[date] && bookedTimeSlots[date].includes(timeSlot);
+}
+
+// Legacy function for backward compatibility
 function markCuppingSlotAsBooked(date, timeSlot) {
-    if (!bookedCuppingSlots[date]) {
-        bookedCuppingSlots[date] = [];
-    }
-    if (!bookedCuppingSlots[date].includes(timeSlot)) {
-        bookedCuppingSlots[date].push(timeSlot);
-        saveBookedCuppingSlots();
-    }
+    // Convert to new system - assume cupping duration of 60 minutes
+    const cuppingServices = ['Dry Cupping - From £30'];
+    markTimeSlotsAsBooked(date, timeSlot, cuppingServices);
 }
 
-// Function to check if a time slot is booked for cupping
+// Legacy function for backward compatibility
 function isCuppingSlotBooked(date, timeSlot) {
-    return bookedCuppingSlots[date] && bookedCuppingSlots[date].includes(timeSlot);
+    return isTimeSlotBooked(date, timeSlot);
 }
 
-// Function to update time slot availability based on cupping bookings
+// Function to update time slot availability based on all bookings
 function updateTimeSlotAvailability(selectedDate) {
     const options = timeSlotSelect.querySelectorAll('option');
 
     options.forEach(option => {
         if (option.value) {
-            const isBookedForCupping = isCuppingSlotBooked(selectedDate, option.value);
+            const isBooked = isTimeSlotBooked(selectedDate, option.value);
 
-            if (isBookedForCupping) {
+            if (isBooked) {
                 option.disabled = true;
                 option.style.color = '#ccc';
                 option.textContent = option.textContent.replace(' (Unavailable)', '') + ' (Unavailable)';
             } else {
                 // Only enable if not disabled by other conditions (like past time)
-                const selectedDate = new Date(dateInput.value);
+                const selectedDateObj = new Date(selectedDate);
                 const today = new Date();
-                const isToday = selectedDate.toDateString() === today.toDateString();
+                const isToday = selectedDateObj.toDateString() === today.toDateString();
 
                 if (isToday) {
                     const currentHour = today.getHours();
-                    const slotHour = parseInt(option.value.split(':')[0]);
-                    if (slotHour <= currentHour) {
+                    const currentMinute = today.getMinutes();
+                    const [slotHour, slotMinute] = option.value.split(':').map(Number);
+                    const slotTime = slotHour * 60 + slotMinute;
+                    const currentTime = currentHour * 60 + currentMinute;
+                    
+                    if (slotTime <= currentTime) {
                         option.disabled = true;
                         option.style.color = '#ccc';
                     } else {
@@ -122,7 +241,7 @@ function updateTimeSlotAvailability(selectedDate) {
 }
 
 // Initialize booked slots on page load
-loadBookedCuppingSlots();
+loadBookedTimeSlots();
 
 // Cache DOM elements for better performance
 const dateInput = document.getElementById('date');
@@ -341,13 +460,13 @@ if (bookingForm) {
             });
 
             if (response.ok) {
-                // Check if cupping services were booked and mark time slot as unavailable
+                // Check if any services were booked and mark appropriate time slots as unavailable
                 const selectedServices = formData.getAll('services');
                 const preferredDate = formData.get('preferredDate');
                 const preferredTime = formData.get('preferredTime');
 
-                if (hasCuppingServices(selectedServices) && preferredDate && preferredTime) {
-                    markCuppingSlotAsBooked(preferredDate, preferredTime);
+                if (hasTimeBlockingServices(selectedServices) && preferredDate && preferredTime) {
+                    markTimeSlotsAsBooked(preferredDate, preferredTime, selectedServices);
                 }
 
                 // Show success message
@@ -580,10 +699,37 @@ function handleServiceSelection() {
         });
     }
 
-    // Update time slot availability if date is selected and cupping services are involved
+    // Show estimated appointment duration
+    const selectedServices = Array.from(checkedBoxes).map(cb => cb.value);
+    if (selectedServices.length > 0) {
+        const duration = calculateAppointmentDuration(selectedServices);
+        const hours = Math.floor(duration / 60);
+        const minutes = duration % 60;
+        let durationText = '';
+        
+        if (hours > 0) {
+            durationText = hours === 1 ? '1 hour' : `${hours} hours`;
+            if (minutes > 0) {
+                durationText += ` ${minutes} minutes`;
+            }
+        } else {
+            durationText = `${minutes} minutes`;
+        }
+        
+        if (estimatedTotalElement) {
+            const currentText = estimatedTotalElement.textContent;
+            const priceMatch = currentText.match(/\(Estimated total: From £\d+\)/);
+            if (priceMatch) {
+                estimatedTotalElement.textContent = `${priceMatch[0]} - Appointment duration: ${durationText}`;
+            } else if (count > 0) {
+                estimatedTotalElement.textContent += ` - Appointment duration: ${durationText}`;
+            }
+        }
+    }
+
+    // Update time slot availability if date is selected
     const dateValue = dateInput ? dateInput.value : null;
     if (dateValue && timeSlotSelect) {
-        const selectedServices = Array.from(checkedBoxes).map(cb => cb.value);
         updateTimeSlotWithGitHubData(dateValue);
     }
 }
@@ -852,7 +998,7 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
         });
     }
 
-    // Apply local cupping bookings
+    // Apply local bookings for all services
     updateTimeSlotAvailability(selectedDate);
 
     // Load and apply GitHub blocked times data
