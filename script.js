@@ -165,10 +165,14 @@ if (dateInput) {
 
             if (isToday) {
                 const currentHour = today.getHours();
+                const currentMinute = today.getMinutes();
                 options.forEach(option => {
                     if (option.value) {
-                        const slotHour = parseInt(option.value.split(':')[0]);
-                        if (slotHour <= currentHour) {
+                        const [slotHour, slotMinute] = option.value.split(':').map(Number);
+                        const slotTime = slotHour * 60 + slotMinute;
+                        const currentTime = currentHour * 60 + currentMinute;
+                        
+                        if (slotTime <= currentTime) {
                             option.disabled = true;
                             option.style.color = '#ccc';
                             option.textContent = option.textContent.replace(' (Past time)', '') + ' (Past time)';
@@ -832,10 +836,14 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
 
     if (isToday) {
         const currentHour = today.getHours();
+        const currentMinute = today.getMinutes();
         options.forEach(option => {
             if (option.value) {
-                const slotHour = parseInt(option.value.split(':')[0]);
-                if (slotHour <= currentHour) {
+                const [slotHour, slotMinute] = option.value.split(':').map(Number);
+                const slotTime = slotHour * 60 + slotMinute;
+                const currentTime = currentHour * 60 + currentMinute;
+                
+                if (slotTime <= currentTime) {
                     option.disabled = true;
                     option.style.color = '#ccc';
                     option.textContent += ' (Past time)';
