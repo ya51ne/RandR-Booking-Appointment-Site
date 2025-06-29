@@ -973,6 +973,21 @@ h4 {
     position: relative;
 }
 
+.service-checkbox .checkmark {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.service-checkbox span:not(.checkmark) {
+    flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: left;
+}
+
 .service-checkbox:hover {
     background-color: rgba(74, 155, 142, 0.05);
 }
@@ -1014,7 +1029,6 @@ h4 {
     transition: all 0.3s ease;
     flex-shrink: 0;
     margin-top: 2px;
-    order: -1;
 }
 
 .service-checkbox input[type="checkbox"]:checked + .checkmark {
@@ -1026,6 +1040,8 @@ h4 {
     flex: 1;
     word-wrap: break-word;
     padding-left: 1rem;
+    text-indent: 0;
+    padding-left: 0;
 }
 
 .services-info {
@@ -1061,7 +1077,8 @@ h4 {
     }
 
     .service-checkbox span:not(.checkmark) {
-        padding-left: 0.75rem;
+        padding-left: 0;
+        margin-left: 0;
     }
 }
 
