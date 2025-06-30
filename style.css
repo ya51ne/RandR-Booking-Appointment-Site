@@ -984,7 +984,8 @@ h4 {
     overflow-wrap: break-word;
     hyphens: auto;
     line-height: 1.4;
-    padding-left: 0.5rem;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 .service-checkbox:hover {
@@ -1070,7 +1071,8 @@ h4 {
     }
 
     .service-checkbox span:not(.checkmark) {
-        padding-left: 0.3rem;
+        padding-left: 0;
+        margin-left: 0;
         line-height: 1.3;
     }
 }
