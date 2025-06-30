@@ -970,12 +970,12 @@ h4 {
     font-size: 0.95rem;
     line-height: 1.4;
     position: relative;
-    gap: 1rem;
 }
 
 .service-checkbox .checkmark {
     flex-shrink: 0;
     margin-top: 0;
+    margin-right: 1rem;
 }
 
 .service-checkbox span:not(.checkmark) {
@@ -984,6 +984,8 @@ h4 {
     overflow-wrap: break-word;
     hyphens: auto;
     line-height: 1.4;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .service-checkbox:hover {
@@ -1061,14 +1063,11 @@ h4 {
         font-size: 0.9rem;
     }
 
-    .service-checkbox {
-        gap: 0.8rem;
-    }
-
     .service-checkbox .checkmark {
         height: 22px;
         width: 22px;
         margin-top: 0;
+        margin-right: 0.8rem;
     }
 
     .service-checkbox span:not(.checkmark) {
