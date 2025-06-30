@@ -961,8 +961,7 @@ h4 {
 }
 
 .service-checkbox {
-    display: flex;
-    align-items: flex-start;
+    display: block;
     cursor: pointer;
     padding: 0.75rem;
     border-radius: 8px;
@@ -973,19 +972,21 @@ h4 {
 }
 
 .service-checkbox .checkmark {
-    flex-shrink: 0;
+    float: left;
     margin-top: 0;
     margin-right: 1rem;
+    flex-shrink: 0;
 }
 
 .service-checkbox span:not(.checkmark) {
-    flex: 1;
+    display: block;
+    margin-left: 3rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
     line-height: 1.4;
-    padding-left: 0;
-    margin-left: 0;
+    text-indent: -3rem;
+    padding-left: 3rem;
 }
 
 .service-checkbox:hover {
@@ -1071,8 +1072,9 @@ h4 {
     }
 
     .service-checkbox span:not(.checkmark) {
-        padding-left: 0;
-        margin-left: 0;
+        margin-left: 2.5rem;
+        text-indent: -2.5rem;
+        padding-left: 2.5rem;
         line-height: 1.3;
     }
 }
