@@ -66,12 +66,12 @@ function saveBookedTimeSlots() {
 
 // Service duration mapping in minutes
 const serviceDurations = {
-    'Indian Head Massage': 30,
+    'Indian Head Massage (20 mins)': 20,
     'Swedish Massage (30 mins)': 30,
     'Swedish Massage (60 mins)': 60,
     'Lymphatic Drainage (30 mins)': 30,
     'Lymphatic Drainage (60 mins)': 60,
-    'Lymphatic Drainage with Indian Head Massage (30 mins)': 30,
+    'Lymphatic Face Drainage with Indian Head Massage (30 mins)': 30,
     'Dry Cupping': 60,
     'Wet Cupping (Hijama)': 60,
     // Multivitamin shots - individual duration (will be calculated based on quantity)
