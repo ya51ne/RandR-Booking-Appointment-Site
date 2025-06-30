@@ -692,12 +692,21 @@ function handleServiceSelection() {
                 durationText = `${minutes} minutes`;
             }
             
-            estimatedTotalElement.innerHTML = `
-                <div class="price-summary">Estimated total: From £${total}</div>
-                <div class="duration-summary">Appointment duration: ${durationText}</div>
-            `;
+            // Clear existing content and set new formatted content
+            estimatedTotalElement.innerHTML = '';
+            
+            const priceDiv = document.createElement('div');
+            priceDiv.className = 'price-summary';
+            priceDiv.textContent = `Estimated total: From £${total}`;
+            
+            const durationDiv = document.createElement('div');
+            durationDiv.className = 'duration-summary';
+            durationDiv.textContent = `Appointment duration: ${durationText}`;
+            
+            estimatedTotalElement.appendChild(priceDiv);
+            estimatedTotalElement.appendChild(durationDiv);
         } else {
-            estimatedTotalElement.textContent = '';
+            estimatedTotalElement.innerHTML = '';
         }
     }
 
