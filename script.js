@@ -676,7 +676,26 @@ function handleServiceSelection() {
     // Update estimated total display
     if (estimatedTotalElement) {
         if (count > 0) {
-            estimatedTotalElement.textContent = `(Estimated total: From £${total})`;
+            // Show estimated appointment duration
+            const selectedServices = Array.from(checkedBoxes).map(cb => cb.value);
+            const duration = calculateAppointmentDuration(selectedServices);
+            const hours = Math.floor(duration / 60);
+            const minutes = duration % 60;
+            let durationText = '';
+            
+            if (hours > 0) {
+                durationText = hours === 1 ? '1 hour' : `${hours} hours`;
+                if (minutes > 0) {
+                    durationText += ` ${minutes} minutes`;
+                }
+            } else {
+                durationText = `${minutes} minutes`;
+            }
+            
+            estimatedTotalElement.innerHTML = `
+                <div class="price-summary">Estimated total: From £${total}</div>
+                <div class="duration-summary">Appointment duration: ${durationText}</div>
+            `;
         } else {
             estimatedTotalElement.textContent = '';
         }
@@ -697,34 +716,6 @@ function handleServiceSelection() {
             checkbox.disabled = false;
             checkbox.parentElement.style.opacity = '1';
         });
-    }
-
-    // Show estimated appointment duration
-    const selectedServices = Array.from(checkedBoxes).map(cb => cb.value);
-    if (selectedServices.length > 0) {
-        const duration = calculateAppointmentDuration(selectedServices);
-        const hours = Math.floor(duration / 60);
-        const minutes = duration % 60;
-        let durationText = '';
-        
-        if (hours > 0) {
-            durationText = hours === 1 ? '1 hour' : `${hours} hours`;
-            if (minutes > 0) {
-                durationText += ` ${minutes} minutes`;
-            }
-        } else {
-            durationText = `${minutes} minutes`;
-        }
-        
-        if (estimatedTotalElement) {
-            const currentText = estimatedTotalElement.textContent;
-            const priceMatch = currentText.match(/\(Estimated total: From £\d+\)/);
-            if (priceMatch) {
-                estimatedTotalElement.textContent = `${priceMatch[0]} - Appointment duration: ${durationText}`;
-            } else if (count > 0) {
-                estimatedTotalElement.textContent += ` - Appointment duration: ${durationText}`;
-            }
-        }
     }
 
     // Update time slot availability if date is selected

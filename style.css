@@ -1079,6 +1079,18 @@ h4 {
     font-weight: 600;
 }
 
+.price-summary {
+    font-weight: 600;
+    color: #2c5f5f;
+    margin-bottom: 0.25rem;
+}
+
+.duration-summary {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
 .character-counter {
     font-size: 0.875rem;
     color: #666;
