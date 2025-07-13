@@ -998,6 +998,29 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
         });
     }
 
+    // Block 2:30pm to 5:00pm Monday to Friday
+    const dayOfWeek = selectedDateObj.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5; // Monday to Friday
+
+    if (isWeekday) {
+        options.forEach(option => {
+            if (option.value && !option.disabled) {
+                const [slotHour, slotMinute] = option.value.split(':').map(Number);
+                const slotTime = slotHour * 60 + slotMinute;
+                
+                // Block times from 14:30 (2:30pm) to 17:00 (5:00pm) - 30 minute slots
+                // This includes: 14:30, 15:00, 15:30, 16:00, 16:30
+                if (slotTime >= 870 && slotTime < 1020) { // 870 = 14:30, 1020 = 17:00
+                    option.disabled = true;
+                    option.style.color = '#ccc';
+                    if (!option.textContent.includes('(Unavailable)')) {
+                        option.textContent += ' (Unavailable)';
+                    }
+                }
+            }
+        });
+    }
+
     // Apply local bookings for all services
     updateTimeSlotAvailability(selectedDate);
 
