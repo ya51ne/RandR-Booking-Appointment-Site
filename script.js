@@ -1045,9 +1045,10 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
                 if (isBlockedOnGitHub) {
                     option.disabled = true;
                     option.style.color = '#ccc';
-                    // Only add (Unavailable) if it's not already there and it's not marked as past time
-                    if (!option.textContent.includes('(Unavailable)') && !option.textContent.includes('(Past time)')) {
-                        option.textContent += ' (Unavailable)';
+                    // Ensure the option shows as unavailable
+                    if (!option.textContent.includes('(Unavailable)')) {
+                        // Remove any existing status and add Unavailable
+                        option.textContent = option.textContent.replace(/ \(Past time\)/g, '') + ' (Unavailable)';
                     }
                     console.log(`Disabled time slot: ${timeValue} for ${selectedDate} (blocked on GitHub)`);
                 }
