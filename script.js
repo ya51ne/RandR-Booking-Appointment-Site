@@ -1010,7 +1010,7 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
                 
                 // Block times from 14:30 (2:30pm) to 17:00 (5:00pm) - 30 minute slots
                 // This includes: 14:30, 15:00, 15:30, 16:00, 16:30
-                if (slotTime >= 870 && slotTime < 1020) { // 870 = 14:30, 1020 = 17:00
+                if (slotTime >= 870 && slotTime <= 990) { // 870 = 14:30, 990 = 16:30
                     option.disabled = true;
                     option.style.color = '#ccc';
                     if (!option.textContent.includes('(Unavailable)')) {
