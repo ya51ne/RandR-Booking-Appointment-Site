@@ -1034,7 +1034,7 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
 
     if (blockedTimes && Array.isArray(blockedTimes) && blockedTimes.length > 0) {
         options.forEach(option => {
-            if (option.value && !option.disabled) {
+            if (option.value) {
                 const timeValue = option.value;
                 // Check if this date-time combination is blocked
                 const dateTimeString = `${selectedDate} ${timeValue}`;
