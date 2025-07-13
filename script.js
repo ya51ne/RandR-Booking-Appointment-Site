@@ -998,19 +998,23 @@ async function updateTimeSlotWithGitHubData(selectedDate) {
         });
     }
 
-    // Block 2:30pm to 5:00pm Monday to Friday
+    // Block 2:30pm to 4:30pm Monday to Friday
     const dayOfWeek = selectedDateObj.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
     const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5; // Monday to Friday
 
     if (isWeekday) {
+        console.log('Blocking weekday times for date:', selectedDate);
         options.forEach(option => {
             if (option.value && !option.disabled) {
                 const [slotHour, slotMinute] = option.value.split(':').map(Number);
                 const slotTime = slotHour * 60 + slotMinute;
                 
-                // Block times from 14:30 (2:30pm) to 17:00 (5:00pm) - 30 minute slots
+                console.log(`Checking time slot ${option.value}: ${slotTime} minutes`);
+                
+                // Block times from 14:30 (2:30pm) to 16:30 (4:30pm) - 30 minute slots
                 // This includes: 14:30, 15:00, 15:30, 16:00, 16:30
                 if (slotTime >= 870 && slotTime <= 990) { // 870 = 14:30, 990 = 16:30
+                    console.log(`Blocking time slot: ${option.value} (${slotTime} minutes)`);
                     option.disabled = true;
                     option.style.color = '#ccc';
                     if (!option.textContent.includes('(Unavailable)')) {
